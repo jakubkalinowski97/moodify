@@ -1,0 +1,50 @@
+@use '@angular/material' as mat;
+@use "../../../../palettes.scss" as palettes;
+
+:host {
+    mat-card {
+        box-sizing: border-box;
+        max-width: 250px;
+        min-width: 250px;
+        margin: 10px;
+        background: mat.get-color-from-palette(palettes.$teal-palette, 700);
+    }
+
+    .img {
+        background-position: center;
+    }
+
+    .default-card {
+        filter: hue-rotate(50deg);
+    }
+
+    mat-card-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    mat-card-header {
+        background: mat.get-color-from-palette(palettes.$teal-palette, 800);
+        padding: 5px 10px;
+    }
+
+    mat-card-footer {
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+    }
+
+    .play-icon {
+        transform: scale(2);
+    }
+
+    .favorite-button {
+        transform: scale(0.5);
+    }
+
+    .favorite-icon {
+        transform: scale(1.5);
+    }
+}

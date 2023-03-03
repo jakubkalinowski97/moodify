@@ -1,0 +1,3 @@
+<div *ngIf="(sounds | async) as soundsList" class="list">
+    <app-sound-card *ngFor="let item of soundsList" [data]="item"></app-sound-card>
+</div>
