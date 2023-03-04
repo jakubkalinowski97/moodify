@@ -1,0 +1,25 @@
+@use '@angular/material' as mat;
+@use "../../../palettes.scss" as palettes;
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+mat-toolbar {    
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    background: mat.get-color-from-palette(palettes.$teal-palette, 800);
+    font-size: medium;
+    
+    .volume {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

@@ -1,0 +1,35 @@
+@use '@angular/material' as mat;
+@use "../../../../../palettes.scss" as palettes;
+
+mat-card {
+    display: flex;
+    max-width: 400px;
+    height: 500px;
+    margin: 10px;
+    background: mat.get-color-from-palette(palettes.$teal-palette, 700);
+    margin: 15px;
+
+    mat-card-header {
+        padding: 16px;
+    }
+
+    mat-card-content {
+        padding: 10px 16px;
+    }
+
+    mat-card-actions {
+        margin-top: auto;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+
+        a {
+            padding: 5px 15px;
+        }
+    }
+}
+
+.card__disabled {
+    pointer-events: none;
+    filter: grayscale(0.9) contrast(0.5)
+}

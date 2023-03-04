@@ -1,0 +1,15 @@
+@use '@angular/material' as mat;
+@use "../../../palettes.scss" as palettes;
+
+.container {
+    width: 100%;
+    display: flex;
+
+    .sounds {
+        width: 60%;
+    }
+
+    .moods {
+        width: 40%;
+    }
+}

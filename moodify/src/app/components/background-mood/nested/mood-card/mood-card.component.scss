@@ -1,0 +1,82 @@
+@use '@angular/material' as mat;
+@use "../../../../../palettes.scss" as palettes;
+
+:host {
+    mat-card {
+        position: relative;
+        box-sizing: border-box;
+        max-width: 200px;
+        min-width: 200px;
+        margin: 10px;
+        background: mat.get-color-from-palette(palettes.$teal-palette, 700);
+    }
+
+    .default-card {
+        filter: hue-rotate(50deg);
+    }
+    
+    mat-card-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    
+    mat-card-header {
+        background: mat.get-color-from-palette(palettes.$teal-palette, 700);
+        padding: 5px 10px;
+    }
+
+    mat-card-footer {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 5px;
+    }
+
+    .image-container {
+        position: relative;
+        width: 100%;
+
+        img {
+            background-position: center;
+            width: 100%;
+        }
+
+        .slider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            transform: translate(-50%, -100%);
+            top: 100%;
+            left: 50%;
+            width: 100%;
+            height: 30px;
+            padding-bottom: 5px;
+            opacity: 0.9;
+            background: mat.get-color-from-palette(palettes.$teal-palette, 700);
+        }
+    }
+
+
+    mat-slider {
+        width: 80%;
+    }
+
+    .play-icon {
+        transform: scale(2);
+    }
+
+    .favorite-button {
+        transform: scale(0.5);
+    }
+
+    .favorite-icon {
+        transform: scale(1.5);
+    }
+}
