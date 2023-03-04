@@ -87,6 +87,14 @@ export class SoundsService {
       id: 9,
       group: 'Cthulhu',
       isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/sounds/vintage-phone-sound.mp3',
+      posterUrl: '',
+      name: 'Dzwonienie starego telefonu',
+      id: 10,
+      group: 'Cthulhu',
+      isFavorite: false
     }
   ]
 

@@ -25,6 +25,38 @@ export class BackgroundMoodService {
       group: 'Cthulhu',
       isFavorite: false
     },
+    {
+      url: this.PREFIX + 'assets/moods/nature-fireplace-mood.mp3',
+      posterUrl: '',
+      name: 'Ognisko',
+      id: 2,
+      group: 'Cthulhu',
+      isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/moods/fireplace-mood.mp3',
+      posterUrl: '',
+      name: 'Kominek',
+      id: 3,
+      group: 'Cthulhu',
+      isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/moods/light-rain-mood.mp3',
+      posterUrl: '',
+      name: 'Deszcz',
+      id: 4,
+      group: 'Cthulhu',
+      isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/moods/wind-mood.mp3',
+      posterUrl: '',
+      name: 'Wichura',
+      id: 5,
+      group: 'Cthulhu',
+      isFavorite: false
+    },
   ]
 
   constructor() { }
