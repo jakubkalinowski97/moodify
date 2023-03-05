@@ -1,5 +1,6 @@
 <mat-toolbar>
     <span>Dźwięki</span>
+    <app-search-input (search)="search($event)"></app-search-input>
     <div class="volume">
         <mat-icon>volume_up</mat-icon>
         <mat-slider min="0" max="1" step="0.01">

@@ -1,0 +1,29 @@
+@use '@angular/material' as mat;
+@use "../../../../palettes.scss" as palettes;
+
+
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    .icon {
+        padding: 0 5px;
+        position: absolute;
+        color: mat.get-color-from-palette(palettes.$teal-palette, 900);
+    }
+    .search-input {
+        height: 30px;
+        max-width: 150px;
+        border-radius: 25px;
+        border: none;
+        outline: transparent;
+        color: mat.get-color-from-palette(palettes.$teal-palette, 900);
+        background: mat.get-color-from-palette(palettes.$teal-palette, 100);
+        padding: 0 15px 0 30px;
+        font-family: 'Roboto';
+    
+        &:focus {
+            outline: 2px mat.get-color-from-palette(palettes.$teal-palette, 900) solid;
+        }
+    }
+}

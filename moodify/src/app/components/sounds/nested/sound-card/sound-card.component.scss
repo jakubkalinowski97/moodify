@@ -8,7 +8,7 @@
         max-width: 200px;
         min-width: 200px;
         margin: 10px;
-        background: mat.get-color-from-palette(palettes.$teal-palette, 700);
+        background: mat.get-color-from-palette(palettes.$teal-palette, 600);
     }
 
     .default-card {
@@ -24,7 +24,7 @@
     }
     
     mat-card-header {
-        background: mat.get-color-from-palette(palettes.$teal-palette, 700);
+        background: mat.get-color-from-palette(palettes.$teal-palette, 600);
         padding: 5px 10px;
     }
 
@@ -59,7 +59,7 @@
             height: 30px;
             padding-bottom: 5px;
             opacity: 0.9;
-            background: mat.get-color-from-palette(palettes.$teal-palette, 700);
+            background: mat.get-color-from-palette(palettes.$teal-palette, 600);
         }
     }
 

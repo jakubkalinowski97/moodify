@@ -13,6 +13,7 @@ import { BackgroundMoodService } from './background-mood.service';
 })
 export class BackgroundMoodComponent {
   moods = new Observable<Sound[]>();
+  repeat = new Observable<boolean>();
   state!: StreamState;
   currentFile!: Sound;
 
@@ -20,26 +21,18 @@ export class BackgroundMoodComponent {
 
   ngOnInit(): void {
     this.moods = this.backgroundMoodService.getMoods();
+    this.repeat = this.audioService.getRepeat();
 
     this.audioService.getState().subscribe((state) => {
       this.state = state;
     });
   }
-
-  openFile(file: any) {
-    if (this.currentFile?.url && file.url === this.currentFile?.url) {
-      return;
-    }
-    this.currentFile = file;
-    this.audioService.stop();
-    this.playStream(file.url);
-  }  
   
   setVolume(value: number): void {
     this.audioService.setVolume(value);
   }
 
-  private playStream(url: string): void {
-    this.audioService.playStream(url).pipe().subscribe();
+  toggleRepeat(): void {
+    this.audioService.toggleRepeat();
   }
 }

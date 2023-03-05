@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { formatDuration } from 'date-fns';
-import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, retry, Subject, takeUntil, tap } from 'rxjs';
 import { AudioEvents } from 'src/app/models/audio-events.enum';
 import { StreamState } from 'src/app/models/stream-state';
 
 @Injectable()
 export class AudioService {
   private stop$ = new Subject<void>();
+  private repeat$ = new BehaviorSubject<boolean>(false);
   private audioObj = new Audio();
   private audioEvents = [
     AudioEvents.Ended,
@@ -28,15 +29,19 @@ export class AudioService {
     duration: 0,
     currentTime: 0, 
     canplay: false,
-    error: false,
+    error: false
   };
 
-  private stateChange: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
+  private stateChange$: BehaviorSubject<StreamState> = new BehaviorSubject(this.state);
 
   constructor() { }
 
   getState(): Observable<StreamState> {
-    return this.stateChange.asObservable();
+    return this.stateChange$.asObservable();
+  }
+
+  getRepeat(): Observable<boolean> {
+    return this.repeat$.asObservable();
   }
 
   play() {
@@ -51,6 +56,10 @@ export class AudioService {
     this.stop$.next();
   }
 
+  toggleRepeat(): void {
+    this.repeat$.next(!this.repeat$.value);
+  }
+
   seekTo(seconds: number) {
     this.audioObj.currentTime = seconds;
   }
@@ -58,6 +67,7 @@ export class AudioService {
   playStream(url: string) {
     return this.streamObservable(url)
       .pipe(
+        // tap(console.log),
         takeUntil(this.stop$)
       );
   }
@@ -129,12 +139,17 @@ export class AudioService {
           this.state.currentTime
         );
         break;
+      case "ended":
+        if(this.repeat$.value) {
+          this.audioObj.play();
+        }
+        break;
       case "error":
         this.resetState();
         this.state.error = true;
         break;
     }
-    this.stateChange.next(this.state);
+    this.stateChange$.next(this.state);
   }
 
   private resetState() {

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { Sound } from 'src/app/models/sound';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SoundsService {
-  PREFIX = 'http://localhost:4200/';
-  SOUNDS: Sound[] = [
+  private PREFIX = 'http://localhost:4200/';
+  private SOUNDS: Sound[] = [
     {
       url: this.PREFIX + 'assets/sounds/broken-radio.wav',
       posterUrl: '',
@@ -95,12 +95,41 @@ export class SoundsService {
       id: 10,
       group: 'Cthulhu',
       isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/sounds/gun-shot-sound.mp3',
+      posterUrl: '',
+      name: 'Wystrzał z pistoletu',
+      id: 11,
+      group: 'Cthulhu',
+      isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/sounds/shotgun-shot-sound.mp3',
+      posterUrl: '',
+      name: 'Wystrzał ze strzelby',
+      id: 12,
+      group: 'Cthulhu',
+      isFavorite: false
     }
   ]
 
   constructor() { }
 
-  getSounds(): Observable<Sound[]> {
-    return of(this.SOUNDS);
+  getSounds(name: string): Observable<Sound[]> {
+    return of(this.SOUNDS).pipe(
+      map((sounds) => sounds
+        .filter((sound) => sound.name.toLowerCase().includes(name.toLowerCase()))
+        .sort(
+          (a, b) => {
+            if (a.name > b.name) {
+              return 1;
+            }
+            if (b.name > a.name) {
+                return -1;
+            }
+            return 0;
+          }
+    )));
   }
 }

@@ -1,17 +1,22 @@
 <mat-toolbar>
     <span>Nastrój</span>
-    <div class="volume">
-        <mat-icon>volume_up</mat-icon>
-        <mat-slider min="0" max="1" step="0.01">
-            <input matSliderThumb value="1" (input)="setVolume($any($event.target).value)">
-        </mat-slider>
-    </div>  
+    <div class="actions">
+        <div class="repeat">
+            <button mat-icon-button (click)="toggleRepeat()">
+                <mat-icon [ngClass]="(repeat | async) ? 'active' : ''">repeat</mat-icon>
+            </button>
+        </div>
+        <div class="volume">
+            <mat-icon>volume_up</mat-icon>
+            <mat-slider min="0" max="1" step="0.01">
+                <input matSliderThumb value="0.5" (input)="setVolume($any($event.target).value)">
+            </mat-slider>
+        </div>  
+    </div>
 </mat-toolbar>
 <div *ngIf="(moods | async) as moodsList" class="container">
     <app-mood-card 
     *ngFor="let item of moodsList" 
-    [data]="item" 
-    [state]="state" 
-    (openFile)="openFile($event)"
+    [data]="item"
     ></app-mood-card>
 </div>

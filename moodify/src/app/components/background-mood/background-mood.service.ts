@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { Sound } from 'src/app/models/sound';
 
 @Injectable({
@@ -57,11 +57,30 @@ export class BackgroundMoodService {
       group: 'Cthulhu',
       isFavorite: false
     },
+    {
+      url: this.PREFIX + 'assets/moods/the-great-old-ones-and-other-beings-music.mp3',
+      posterUrl: '',
+      name: 'Muzyka Cthulhu',
+      id: 6,
+      group: 'Cthulhu',
+      isFavorite: false
+    }
   ]
 
   constructor() { }
 
   getMoods(): Observable<Sound[]> {
-    return of(this.MOODS);
+    return of(this.MOODS).pipe(
+      map((moods) => moods.sort(
+        (a, b) => {
+          if (a.name > b.name) {
+            return 1;
+          }
+          if (b.name > a.name) {
+              return -1;
+          }
+          return 0;
+        }
+    )))
   }
 }

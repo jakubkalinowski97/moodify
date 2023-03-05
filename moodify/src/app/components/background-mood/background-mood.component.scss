@@ -14,12 +14,27 @@ mat-toolbar {
     display: flex;
     justify-content: space-between;
     height: 50px;
-    background: mat.get-color-from-palette(palettes.$teal-palette, 800);
+    background: mat.get-color-from-palette(palettes.$teal-palette, 700);
     font-size: medium;
-    
-    .volume {
+
+    .actions {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+
+        .repeat {
+            display: flex;
+            align-items: center;
+
+            .active {
+                color: mat.get-color-from-palette(palettes.$teal-palette, 900);
+            }
+        }
+
+        .volume {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     }
+    
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AudioService } from 'src/app/core/services/audio.service';
 import { Sound } from 'src/app/models/sound';
 import { StreamState } from 'src/app/models/stream-state';
@@ -6,20 +6,27 @@ import { StreamState } from 'src/app/models/stream-state';
 @Component({
   selector: 'app-mood-card',
   templateUrl: './mood-card.component.html',
-  styleUrls: ['./mood-card.component.scss']
+  styleUrls: ['./mood-card.component.scss'],
+  providers: [AudioService]
 })
-export class MoodCardComponent {
+export class MoodCardComponent implements OnInit {
   @Input()
   data!: Sound;
-  @Input()
   state!: StreamState;
-
-  @Output() openFile = new EventEmitter<Sound>();
+  private isLoaded: boolean = false;
 
   constructor(private audioService: AudioService) {}
+  
+  ngOnInit(): void {
+    this.audioService.getState().subscribe((state) => {
+      this.state = state;
+    });
+  }
 
   play() {
-    this.openFile.emit(this.data);
+    if (!this.isLoaded) {
+      this.openFile(this.data);
+    }
     this.audioService.play();
   }
 
@@ -33,5 +40,14 @@ export class MoodCardComponent {
 
   seekTo(value: number): void {
     this.audioService.seekTo(value);
+  }
+
+  openFile(file: Sound) {
+    this.playStream(file.url);
+    this.isLoaded = true;
+  }  
+
+  private playStream(url: string): void {
+    this.audioService.playStream(url).pipe().subscribe();
   }
 }

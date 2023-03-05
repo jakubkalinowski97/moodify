@@ -3,10 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { CardComponent } from './pages/home/nested/card/card.component';
 import { MoodCardComponent } from './components/background-mood/nested/mood-card/mood-card.component';
 import { SoundsAndMoodsComponent } from './pages/sounds-and-moods/sounds-and-moods.component';
 import { AudioService } from './core/services/audio.service';
+import { SearchInputComponent } from './core/components/search-input/search-input.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { AudioService } from './core/services/audio.service';
     CardComponent,
     BackgroundMoodComponent,
     MoodCardComponent,
-    SoundsAndMoodsComponent
+    SoundsAndMoodsComponent,
+    SearchInputComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { AudioService } from './core/services/audio.service';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatSliderModule
+    MatSliderModule,
+    MatInputModule
   ],
   providers: [AudioService],
   bootstrap: [AppComponent]

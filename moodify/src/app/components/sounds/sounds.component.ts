@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, Observable, Subject, switchMap, tap } from 'rxjs';
 import { AudioService } from 'src/app/core/services/audio.service';
 import { Sound } from 'src/app/models/sound';
 import { StreamState } from 'src/app/models/stream-state';
@@ -13,16 +13,19 @@ import { SoundsService } from './sounds.service';
 })
 export class SoundsComponent implements OnInit {
   sounds = new Observable<Sound[]>();
+  searchValue$ = new BehaviorSubject<string>('');
   state!: StreamState;
   currentFile!: Sound;
 
   constructor(private soundsService: SoundsService, private audioService: AudioService) {}
 
   ngOnInit(): void {
-    this.sounds = this.soundsService.getSounds();
+    this.handleSearch();
+    
     this.audioService.getState().subscribe((state) => {
       this.state = state;
     });
+
   }
 
   indentify(_index: number, item: Sound): number {
@@ -40,6 +43,18 @@ export class SoundsComponent implements OnInit {
 
   setVolume(value: number): void {
     this.audioService.setVolume(value);
+  }
+
+  search(value: string): void {
+    this.searchValue$.next(value);
+  }
+
+  private handleSearch(): void {
+    this.sounds = this.searchValue$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      switchMap((name) => this.soundsService.getSounds(name))
+    )
   }
 
   private playStream(url: string): void {

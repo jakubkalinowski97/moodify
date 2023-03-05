@@ -2,11 +2,12 @@
 @use "../../../palettes.scss" as palettes;
 
 .container {
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    max-height: calc(100vh - 120px);
+    height: calc(100vh - 120px);
     overflow-y: auto;
 }
 
@@ -14,7 +15,7 @@ mat-toolbar {
     display: flex;
     justify-content: space-between;
     height: 50px;
-    background: mat.get-color-from-palette(palettes.$teal-palette, 800);
+    background: mat.get-color-from-palette(palettes.$teal-palette, 700);
     font-size: medium;
     
     .volume {
