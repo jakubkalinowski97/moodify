@@ -12,7 +12,7 @@ export class BackgroundMoodService {
     {
       url: this.PREFIX + 'assets/moods/jazz-bar-music.mp3',
       posterUrl: '',
-      name: 'Barowa muzyka jazzowa',
+      name: 'Muzyka jazzowa',
       id: 0,
       group: 'Cthulhu',
       isFavorite: false
@@ -62,6 +62,38 @@ export class BackgroundMoodService {
       posterUrl: '',
       name: 'Muzyka Cthulhu',
       id: 6,
+      group: 'Cthulhu',
+      isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/moods/thunder-with-rain-mood.wav',
+      posterUrl: '',
+      name: 'Burza',
+      id: 7,
+      group: 'Cthulhu',
+      isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/moods/city-1930s-mood-1.mp3',
+      posterUrl: '',
+      name: 'Miasto za dnia',
+      id: 8,
+      group: 'Cthulhu',
+      isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/moods/noir-mood.mp3',
+      posterUrl: '',
+      name: 'Nastrój noir',
+      id: 9,
+      group: 'Cthulhu',
+      isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/moods/bar-1920s-mood.mp3',
+      posterUrl: '',
+      name: 'Bar (muzyka, rozmowy, tło)',
+      id: 10,
       group: 'Cthulhu',
       isFavorite: false
     }

@@ -42,7 +42,7 @@ export class SoundsComponent implements OnInit {
   }
 
   setVolume(value: number): void {
-    this.audioService.setVolume(value);
+    this.audioService.setVolumeWithMultiplier(value);
   }
 
   search(value: string): void {

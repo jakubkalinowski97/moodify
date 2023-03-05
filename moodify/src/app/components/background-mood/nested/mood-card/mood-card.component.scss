@@ -2,17 +2,33 @@
 @use "../../../../../palettes.scss" as palettes;
 
 :host {
+    box-sizing: border-box;
+    width: 100%;
+
     mat-card {
         position: relative;
         box-sizing: border-box;
-        max-width: 200px;
-        min-width: 200px;
-        margin: 10px;
+        margin: 10px 10px 0 10px;
         background: mat.get-color-from-palette(palettes.$teal-palette, 600);
+        overflow: hidden;
+        min-width: 450px;
+
+        &:hover {
+            .slider {
+                opacity: 0.95;
+            }
+        }
+    }
+    
+    .mat-card__active {
+        outline: 5px solid mat.get-color-from-palette(palettes.$teal-palette, 900);
     }
 
-    .default-card {
-        filter: hue-rotate(50deg);
+    mat-card-content {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     
     mat-card-title {
@@ -22,61 +38,45 @@
         font-size: 14px;
         line-height: 1.4;
     }
-    
-    mat-card-header {
-        background: mat.get-color-from-palette(palettes.$teal-palette, 600);
-        padding: 5px 10px;
-    }
-
-    mat-card-footer {
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        padding: 5px;
-    }
-
-    .image-container {
-        position: relative;
-        width: 100%;
-
-        img {
-            background-position: center;
-            width: 100%;
-        }
-
-        .slider {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            transform: translate(-50%, -100%);
-            top: 100%;
-            left: 50%;
-            width: 100%;
-            height: 30px;
-            padding-bottom: 5px;
-            opacity: 0.9;
-            background: mat.get-color-from-palette(palettes.$teal-palette, 600);
-        }
-    }
-
 
     mat-slider {
-        width: 80%;
+        max-width: 200px;
+        min-width: 150px;
     }
 
-    .play-icon {
-        transform: scale(2);
+    .slider {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        height: 100%;
+        padding: 5px 5px 5px 20px;
+        opacity: 0;
+        background: mat.get-color-from-palette(palettes.$teal-palette, 600);
+        transition: 0.2s;
     }
 
-    .favorite-button {
-        transform: scale(0.5);
+    .actions {
+        display: flex;
+        align-items: center;
     }
 
-    .favorite-icon {
+    .main-button {
+        margin-left: 5px;
+    }
+
+    .smooth-play-button {
+        transform: scale(0.7);
+    }
+
+    .active-button {
+        color: mat.get-color-from-palette(palettes.$teal-palette, 900);
+    }
+
+    .icon {
         transform: scale(1.5);
     }
 }

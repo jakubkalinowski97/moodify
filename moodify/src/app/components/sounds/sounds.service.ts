@@ -65,14 +65,6 @@ export class SoundsService {
       isFavorite: false
     },
     {
-      url: this.PREFIX + 'assets/sounds/thunder-with-rain.wav',
-      posterUrl: '',
-      name: 'Burza',
-      id: 7,
-      group: 'Cthulhu',
-      isFavorite: false
-    },
-    {
       url: this.PREFIX + 'assets/sounds/train.mp3',
       posterUrl: '',
       name: 'Pociąg',

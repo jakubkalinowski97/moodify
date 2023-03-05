@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AudioService } from '../../core/services/audio.service';
 import { Sound } from '../../models/sound';
 import { StreamState } from '../../models/stream-state';
@@ -13,7 +13,8 @@ import { BackgroundMoodService } from './background-mood.service';
 })
 export class BackgroundMoodComponent {
   moods = new Observable<Sound[]>();
-  repeat = new Observable<boolean>();
+  repeat$ = new Observable<boolean>();
+  volume$ = new BehaviorSubject<number>(0.5);
   state!: StreamState;
   currentFile!: Sound;
 
@@ -21,7 +22,8 @@ export class BackgroundMoodComponent {
 
   ngOnInit(): void {
     this.moods = this.backgroundMoodService.getMoods();
-    this.repeat = this.audioService.getRepeat();
+    this.audioService.setRepeat(true);
+    this.repeat$ = this.audioService.getRepeat();
 
     this.audioService.getState().subscribe((state) => {
       this.state = state;
@@ -29,7 +31,7 @@ export class BackgroundMoodComponent {
   }
   
   setVolume(value: number): void {
-    this.audioService.setVolume(value);
+    this.volume$.next(value);
   }
 
   toggleRepeat(): void {

@@ -8,6 +8,7 @@ import { StreamState } from 'src/app/models/stream-state';
 export class AudioService {
   private stop$ = new Subject<void>();
   private repeat$ = new BehaviorSubject<boolean>(false);
+  private volume$ = new BehaviorSubject<number>(1);
   private audioObj = new Audio();
   private audioEvents = [
     AudioEvents.Ended,
@@ -44,6 +45,14 @@ export class AudioService {
     return this.repeat$.asObservable();
   }
 
+  getVolume(): Observable<number> {
+    return this.volume$.asObservable();
+  }
+
+  getVolumeValue(): number {
+    return this.volume$.value;
+  }
+
   play() {
     this.audioObj.play();
   }
@@ -60,6 +69,10 @@ export class AudioService {
     this.repeat$.next(!this.repeat$.value);
   }
 
+  setRepeat(value: boolean): void {
+    this.repeat$.next(value);
+  }
+
   seekTo(seconds: number) {
     this.audioObj.currentTime = seconds;
   }
@@ -73,6 +86,10 @@ export class AudioService {
   }
 
   setVolume(value: number): void {
+    this.volume$.next(value);
+  }
+
+  setVolumeWithMultiplier(value: number): void {
     this.audioObj.volume = value;
   }
 
