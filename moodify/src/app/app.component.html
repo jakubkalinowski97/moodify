@@ -1,11 +1,9 @@
-<div *ngIf="isMobile; else app">
+<div *ngIf="isMobile">
   <span>Aby skorzystać z aplikacji użyj komputera</span>
 </div>
-<ng-template #app>
-  <mat-drawer-container autosize>
-    <mat-drawer [opened]="toolbarService.isOpened | async" mode="side">
-        <app-sidenav></app-sidenav>
-    </mat-drawer>
-    <app-main></app-main>
-  </mat-drawer-container>
-</ng-template>
+<mat-drawer-container autosize *ngIf="!isMobile">
+  <mat-drawer [opened]="toolbarService.isOpened | async" mode="side">
+      <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <app-main></app-main>
+</mat-drawer-container>
