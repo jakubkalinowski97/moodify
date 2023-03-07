@@ -1,7 +1,4 @@
-<div *ngIf="isMobile">
-  <span>Aby skorzystać z aplikacji użyj komputera</span>
-</div>
-<mat-drawer-container autosize *ngIf="!isMobile">
+<mat-drawer-container>
   <mat-drawer [opened]="toolbarService.isOpened | async" mode="side">
       <app-sidenav></app-sidenav>
   </mat-drawer>

@@ -1,17 +1,46 @@
 @use '@angular/material' as mat;
 @use "../../../palettes.scss" as palettes;
 
-.container {
+:host {
     width: 100%;
-    display: flex;
-    padding: 0 0 5px 0;
-
-    .sounds {
-        width: 60%;
-        border-left: 10px solid mat.get-color-from-palette(palettes.$teal-palette, 700);
-    }
-
-    .moods {
-        width: 40%;
+    .container {
+        box-sizing: border-box;
+        display: flex;
+        width: 100%;
+        height: 100%;
+    
+        .sounds {
+            width: 60%;
+            border-left: 10px solid mat.get-color-from-palette(palettes.$teal-palette, 700);
+        }
+    
+        .moods {
+            width: 40%;
+        }
     }
 }
+
+
+
+@media only screen and (max-width: 750px) {
+    :host {
+        .container {    
+                flex-direction: column;
+                overflow: hidden;
+    
+            .sounds {
+                width: 100%;
+                height: 50%;
+                border-left: none;
+                background-color: mat.get-color-from-palette(palettes.$teal-palette, 200);
+                z-index: 1;
+            }
+    
+            .moods {
+                width: 100%;
+                height: 50%;
+                background-color: mat.get-color-from-palette(palettes.$teal-palette, 200);
+            }
+        }
+    }
+  }

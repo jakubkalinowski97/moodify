@@ -2,16 +2,14 @@
 @use "../../../../../palettes.scss" as palettes;
 
 :host {
-    box-sizing: border-box;
     width: 100%;
 
     mat-card {
         position: relative;
-        box-sizing: border-box;
-        margin: 10px 10px 0 10px;
+        margin: 5px 0 5px 0;
         background: mat.get-color-from-palette(palettes.$teal-palette, 600);
         overflow: hidden;
-        min-width: 450px;
+        width: 100%;
 
         &:hover {
             .slider {
@@ -19,7 +17,6 @@
             }
         }
     }
-    
     .mat-card__active {
         outline: 2px solid white;
     }
@@ -80,3 +77,28 @@
         transform: scale(1.5);
     }
 }
+
+
+@media only screen and (max-width: 750px) {
+    :host {
+        .slider {
+            display: none;
+        }
+
+        .actions {
+            justify-content: flex-end;
+
+            .volume-slider {
+                max-width: 50%;
+                min-width: 100px;
+                margin-left: 2px;
+                margin-right: 10px;
+            }
+
+            .icon-volume {
+                margin-left: 5px;
+            }
+        }
+
+    }
+  }

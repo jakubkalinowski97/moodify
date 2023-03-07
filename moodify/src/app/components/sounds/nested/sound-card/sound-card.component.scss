@@ -5,9 +5,8 @@
     mat-card {
         position: relative;
         box-sizing: border-box;
-        max-width: 200px;
-        min-width: 200px;
-        margin: 10px;
+        max-width: 250px;
+        margin: 0 10px 10px 0;
         background: mat.get-color-from-palette(palettes.$teal-palette, 600);
     }
 
@@ -26,6 +25,7 @@
     mat-card-header {
         background: mat.get-color-from-palette(palettes.$teal-palette, 600);
         padding: 5px 10px;
+        max-height: 70px;
     }
 
     mat-card-footer {
@@ -80,3 +80,16 @@
         transform: scale(1.5);
     }
 }
+
+
+
+@media only screen and (max-width: 750px) {
+    :host {    
+        max-width: 50%;
+        width: 200px;
+
+        mat-card-title {
+            height: 60px;
+        }
+    }
+  }
