@@ -96,6 +96,22 @@ export class BackgroundMoodService {
       id: 10,
       group: 'Cthulhu',
       isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/moods/nature-mood.mp3',
+      posterUrl: '',
+      name: 'Słoneczny dzień',
+      id: 11,
+      group: 'Cthulhu',
+      isFavorite: false
+    },
+    {
+      url: this.PREFIX + 'assets/moods/steam-train-interior-mood.mp3',
+      posterUrl: '',
+      name: 'Jazda pociągiem',
+      id: 12,
+      group: 'Cthulhu',
+      isFavorite: false
     }
   ]
 

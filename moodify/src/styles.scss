@@ -47,3 +47,25 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: mat.get-color-from-palette(palettes.$teal-palette, 700) mat.get-color-from-palette(palettes.$teal-palette, 700);
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: mat.get-color-from-palette(palettes.$teal-palette, 200);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: mat.get-color-from-palette(palettes.$teal-palette, 700);
+    border-radius: 10px;
+    border: 3px solid mat.get-color-from-palette(palettes.$teal-palette, 200);
+  }
