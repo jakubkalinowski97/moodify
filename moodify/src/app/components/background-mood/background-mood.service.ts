@@ -7,7 +7,7 @@ import { Sound } from 'src/app/models/sound';
 })
 export class BackgroundMoodService {
 
-  PREFIX = 'http://localhost:4200/';
+  PREFIX = '';
   MOODS: Sound[] = [
     {
       url: this.PREFIX + 'assets/moods/jazz-bar-music.mp3',
