@@ -6,7 +6,7 @@ import { Sound } from 'src/app/models/sound';
   providedIn: 'root'
 })
 export class SoundsService {
-  private PREFIX = 'http://localhost:4200/';
+  private PREFIX = '';
   private SOUNDS: Sound[] = [
     {
       url: this.PREFIX + 'assets/sounds/broken-radio.wav',
