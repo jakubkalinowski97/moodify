@@ -4,8 +4,7 @@
 mat-card {
     display: flex;
     max-width: 400px;
-    height: 500px;
-    margin: 10px;
+    max-height: 500px;
     background: mat.get-color-from-palette(palettes.$teal-palette, 700);
     margin: 15px;
 
@@ -33,3 +32,18 @@ mat-card {
     pointer-events: none;
     filter: grayscale(0.9) contrast(0.5)
 }
+
+
+@media only screen and (max-width: 750px) {
+    mat-card {
+        width: 100%;
+
+        mat-card-actions {
+            margin-bottom: 0px;
+    
+            a {
+                padding: 5px;
+            }
+        }
+    }
+  }
