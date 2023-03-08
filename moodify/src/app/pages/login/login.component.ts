@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
@@ -8,10 +9,14 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.showLoginModal();
+    if(this.authService.isAuthenticatedRaw()) {
+      this.router.navigate(['/'])
+    } else {
+      this.showLoginModal();
+    }
   }
 
   showLoginModal(): void {
