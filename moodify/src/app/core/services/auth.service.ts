@@ -16,7 +16,6 @@ export class AuthService {
 
   private handleNetlifyEvents(): void {
     netlifyIdentity.on('init', (user) => {
-      this.user$.subscribe(console.log)
       this.user$.next(user);
       this.user = user;
     });
@@ -56,7 +55,6 @@ export class AuthService {
   isAuthenticated(): Observable<boolean> {
     return this.user$.asObservable()
       .pipe(
-        tap(console.log),
         map(user => Boolean(user))
       )
   }

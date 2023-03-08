@@ -106,7 +106,6 @@ export class MoodCardComponent implements OnInit {
 
     const interval = setInterval(() => {
       this.setVolume(currentvolume);
-      console.log()
       currentvolume -= decreaseByStep;
       if (currentvolume <= 0) {
         this.audioService.pause();
