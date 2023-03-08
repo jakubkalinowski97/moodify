@@ -16,21 +16,15 @@ export class AuthService {
 
   private handleNetlifyEvents(): void {
     netlifyIdentity.on('init', (user) => {
-      console.log('init')
       this.user$.subscribe(console.log)
       this.user$.next(user);
-      if(user) {
-        this.user = user;
-      }
+      this.user = user;
     });
 
     netlifyIdentity.on('login', (user) => {
-      if(user) {
-        console.log(user);
         this.user$.next(user);
         this.user = user;
         this.closeLoginModal();
-      }
     });
 
     netlifyIdentity.on('logout', () => {
