@@ -7,7 +7,5 @@ import { ToolbarService } from './components/toolbar/toolbar.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  isMobile = /Android|iPhone/i.test(navigator.userAgent);
-  title = 'Moodify';
   constructor(public toolbarService: ToolbarService){}
 }

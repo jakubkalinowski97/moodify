@@ -26,6 +26,7 @@ import { MoodCardComponent } from './components/background-mood/nested/mood-card
 import { SoundsAndMoodsComponent } from './pages/sounds-and-moods/sounds-and-moods.component';
 import { AudioService } from './core/services/audio.service';
 import { SearchInputComponent } from './core/components/search-input/search-input.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SearchInputComponent } from './core/components/search-input/search-inpu
     BackgroundMoodComponent,
     MoodCardComponent,
     SoundsAndMoodsComponent,
-    SearchInputComponent
+    SearchInputComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

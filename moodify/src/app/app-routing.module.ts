@@ -1,24 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SoundsComponent } from './components/sounds/sounds.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SoundsAndMoodsComponent } from './pages/sounds-and-moods/sounds-and-moods.component';
-
+import { AuthGuard } from './core/guards/auth.guard';
+import { LoginComponent } from './pages/login/login.component';
 
 
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'sounds-and-moods/cthulhu',
+    pathMatch: 'full',
     component: SoundsAndMoodsComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'sounds-and-moods/witcher',
-    component: SoundsComponent
-  }
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: '*',
+    redirectTo: '/'
+  },
+  {
+    path: '**',
+    redirectTo: '/'
+  },
 ];
 
 @NgModule({
