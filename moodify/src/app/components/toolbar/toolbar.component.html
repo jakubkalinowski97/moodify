@@ -3,4 +3,5 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>Moodify ({{appVersion}})</span>
+  <span *ngIf="(user$ | async) as user" class="user">{{user.email}}</span>
 </mat-toolbar>

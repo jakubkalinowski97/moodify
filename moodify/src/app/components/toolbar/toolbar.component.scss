@@ -5,5 +5,9 @@
     width: 100%;
     mat-toolbar {
         background: linear-gradient(180deg, mat.get-color-from-palette(palettes.$teal-palette, 900) 0%, mat.get-color-from-palette(palettes.$teal-palette, 700) 100%);
+
+        .user {
+            margin-left: auto;
+        }
     }
 }
