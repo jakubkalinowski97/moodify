@@ -1,3 +1,4 @@
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { Sound } from 'src/app/models/sound';
@@ -6,6 +7,8 @@ import { Sound } from 'src/app/models/sound';
   providedIn: 'root'
 })
 export class BackgroundMoodService {
+
+  constructor(private api: HttpClient) {}
 
   PREFIX = '';
   MOODS: Sound[] = [
@@ -115,8 +118,6 @@ export class BackgroundMoodService {
     }
   ]
 
-  constructor() { }
-
   getMoods(): Observable<Sound[]> {
     return of(this.MOODS).pipe(
       map((moods) => moods.sort(
@@ -130,5 +131,9 @@ export class BackgroundMoodService {
           return 0;
         }
     )))
+  }
+
+  getTest(): Observable<any> {
+    return this.api.get('/categories.json', {observe: 'body'});
   }
 }

@@ -21,6 +21,7 @@ export class BackgroundMoodComponent {
   constructor(private audioService: AudioService, private backgroundMoodService: BackgroundMoodService) {}
 
   ngOnInit(): void {
+    this.backgroundMoodService.getTest().subscribe(console.log);
     this.moods = this.backgroundMoodService.getMoods();
     this.audioService.setRepeat(true);
     this.repeat$ = this.audioService.getRepeat();
