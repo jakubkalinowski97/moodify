@@ -134,6 +134,6 @@ export class BackgroundMoodService {
   }
 
   getTest(): Observable<any> {
-    return this.api.get('/categories.json', {observe: 'body'});
+    return this.api.get('/categories');
   }
 }
