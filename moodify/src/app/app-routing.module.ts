@@ -10,8 +10,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: LoginComponent,
-    canActivate: [AuthGuard]
+    component: LoginComponent
   },
   {
     path: 'sounds-and-moods/cthulhu',
@@ -21,7 +20,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '*',
