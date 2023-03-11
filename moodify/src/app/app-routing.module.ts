@@ -8,29 +8,26 @@ import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
+    path: 'login',
     component: LoginComponent
   },
   {
     path: 'sounds-and-moods/cthulhu',
-    pathMatch: 'full',
     component: SoundsAndMoodsComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'home',
-    pathMatch: 'full',
     component: HomeComponent,
     canActivate: [AuthGuard]
   },
   {
     path: '*',
-    redirectTo: '/'
+    redirectTo: '/home'
   },
   {
     path: '**',
-    redirectTo: '/'
+    redirectTo: '/home'
   },
 ];
 

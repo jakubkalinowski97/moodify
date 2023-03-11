@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class AuthService {
   private user$ = new Subject<User | null>();
   private user!: User | null;
+  private inviteToken: string = '';
+
   constructor(private router: Router) { 
     this.handleNetlifyEvents();
     netlifyIdentity.init();
@@ -63,5 +65,13 @@ export class AuthService {
 
   isAuthenticatedRaw(): boolean {
     return Boolean(this.user);
+  }
+
+  setInviteToken(token: string): void {
+    this.inviteToken = token;
+  }
+
+  getInviteToken(): string {
+    return this.inviteToken;
   }
 }

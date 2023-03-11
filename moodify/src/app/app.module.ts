@@ -27,6 +27,7 @@ import { SoundsAndMoodsComponent } from './pages/sounds-and-moods/sounds-and-moo
 import { AudioService } from './core/services/audio.service';
 import { SearchInputComponent } from './core/components/search-input/search-input.component';
 import { LoginComponent } from './pages/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { LoginComponent } from './pages/login/login.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
