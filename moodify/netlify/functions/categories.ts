@@ -8,10 +8,12 @@ export const handler: Handler = withPlanetscale(async (_event, context) => {
 
   const categories = await connection.execute("SELECT * FROM category");
 
-  const data = JSON.stringify(categories);
+  const data = categories.rows;
+
+  const parsedData = JSON.stringify(data);
 
   return {
-    body: data,
+    body: parsedData,
     statusCode: 200,
   };
 });
