@@ -1,5 +1,5 @@
-import type { Handler } from 'https://edge.netlify.com'
-import { withPlanetscale } from "https://esm.sh/@netlify/planetscale";
+import { Handler } from "@netlify/functions";
+import { withPlanetscale } from "@netlify/planetscale";
 
 export const handler: Handler = withPlanetscale(async (_event, context) => {
   const {
