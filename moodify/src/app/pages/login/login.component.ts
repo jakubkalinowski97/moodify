@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.authService.isAuthenticatedRaw()) {
-      this.router.navigate(['/'])
+      this.router.navigate(['/home']);
     } else {
       this.showLoginModal();
     }

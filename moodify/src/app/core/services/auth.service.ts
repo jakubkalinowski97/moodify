@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import netlifyIdentity, { User } from 'netlify-identity-widget';
 import { Observable, map, Subject, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Observable, map, Subject, tap } from 'rxjs';
 export class AuthService {
   private user$ = new Subject<User | null>();
   private user!: User | null;
-  constructor() { 
+  constructor(private router: Router) { 
     this.handleNetlifyEvents();
     netlifyIdentity.init();
   }
@@ -24,6 +25,7 @@ export class AuthService {
         this.user$.next(user);
         this.user = user;
         this.closeLoginModal();
+        this.router.navigate(['/']);
     });
 
     netlifyIdentity.on('logout', () => {

@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: HomeComponent,
+    component: LoginComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -20,8 +20,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'home',
+    component: HomeComponent
   },
   {
     path: '*',
