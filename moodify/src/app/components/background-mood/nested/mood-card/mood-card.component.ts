@@ -73,7 +73,7 @@ export class MoodCardComponent implements OnInit {
   }
 
   openFile(file: Sound) {
-    this.playStream(file.url);
+    this.playStream(file.audio_url);
     this.isLoaded = true;
   }
 

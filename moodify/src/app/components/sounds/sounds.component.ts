@@ -33,12 +33,12 @@ export class SoundsComponent implements OnInit {
   }
 
   openFile(file: any) {
-    if (this.currentFile?.url && file.url === this.currentFile?.url) {
+    if (this.currentFile?.audio_url && file.audio_url === this.currentFile?.audio_url) {
       return;
     }
     this.currentFile = file;
     this.audioService.stop();
-    this.playStream(file.url);
+    this.playStream(file.audio_url);
   }
 
   setVolume(value: number): void {
@@ -51,7 +51,7 @@ export class SoundsComponent implements OnInit {
 
   private handleSearch(): void {
     this.sounds = this.searchValue$.pipe(
-      debounceTime(200),
+      debounceTime(500),
       distinctUntilChanged(),
       switchMap((name) => this.soundsService.getSounds(name))
     )

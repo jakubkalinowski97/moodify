@@ -5,3 +5,11 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[edge_functions]]
+  path = '/categories.json'
+  function = 'categories.json'
+
+[[edge_functions]]
+  path = '/audios.json'
+  function = 'audios.json'

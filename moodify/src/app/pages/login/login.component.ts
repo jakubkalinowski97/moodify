@@ -11,23 +11,7 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
-    let routeFragment = this.activatedRoute.fragment
-
-    routeFragment
-      .pipe(
-        filter((fragment: any) => !!fragment),
-        map((fragment: string) => fragment)
-      )
-      .subscribe(fragment => {
-        console.log(fragment);
-        let f = fragment?.match(/^(.*?)&/);
-          if(f) {
-          let token: string = f[1].replace('invite_token=', '');
-          this.authService.setInviteToken(token);
-        }
-    });
-  }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     if(this.authService.isAuthenticatedRaw()) {

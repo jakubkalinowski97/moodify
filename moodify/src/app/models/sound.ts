@@ -1,5 +1,5 @@
 export interface Sound {
-    url: string,
+    audio_url: string,
     name: string,
     posterUrl: string,
     id: number;
