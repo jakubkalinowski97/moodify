@@ -15,6 +15,7 @@ export class BackgroundMoodComponent {
   moods = new Observable<Sound[]>();
   repeat$ = new Observable<boolean>();
   volume$ = new BehaviorSubject<number>(0.5);
+  loading$!: Observable<boolean>;
   state!: StreamState;
   currentFile!: Sound;
 
@@ -22,6 +23,7 @@ export class BackgroundMoodComponent {
 
   ngOnInit(): void {
     this.moods = this.backgroundMoodService.getMoods();
+    this.loading$ = this.backgroundMoodService.getLoading();
     this.audioService.setRepeat(true);
     this.repeat$ = this.audioService.getRepeat();
 
