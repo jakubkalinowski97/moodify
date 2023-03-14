@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AudioService } from 'app/core/services/audio.service';
+import { Sound } from 'app/models/sound';
+import { StreamState } from 'app/models/stream-state';
 import { BehaviorSubject, Observable} from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { AudioService } from 'src/app/core/services/audio.service';
-import { Sound } from 'src/app/models/sound';
-import { StreamState } from 'src/app/models/stream-state';
 import { SoundsService } from './sounds.service';
 
 @Component({

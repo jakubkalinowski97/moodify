@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AudioService } from 'src/app/core/services/audio.service';
 import { ToolbarService } from './toolbar.service';
 import packageJson from '../../../../package.json';
 import { AuthService } from '../../core/services/auth.service';

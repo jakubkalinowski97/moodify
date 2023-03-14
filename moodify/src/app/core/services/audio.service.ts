@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { AudioEvents } from 'app/models/audio-events.enum';
+import { StreamState } from 'app/models/stream-state';
 import { formatDuration } from 'date-fns';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
-import { AudioEvents } from 'src/app/models/audio-events.enum';
-import { StreamState } from 'src/app/models/stream-state';
 
 @Injectable()
 export class AudioService {

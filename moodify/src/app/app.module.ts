@@ -28,7 +28,9 @@ import { SoundsAndMoodsComponent } from './pages/sounds-and-moods/sounds-and-moo
 import { AudioService } from './core/services/audio.service';
 import { SearchInputComponent } from './core/components/search-input/search-input.component';
 import { LoginComponent } from './pages/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AdminComponent } from './pages/admin/admin/admin.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
     MoodCardComponent,
     SoundsAndMoodsComponent,
     SearchInputComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,14 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatProgressSpinnerModule
   ],
-  providers: [AudioService],
+  providers: [
+    AudioService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

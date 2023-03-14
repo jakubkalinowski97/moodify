@@ -6,9 +6,16 @@ export const handler: Handler = withPlanetscale(async (event, context) => {
     planetscale: { connection },
   } = context;
 
+  
+  if(!context.clientContext?.["identity"]) {
+    return {
+      statusCode: 401
+    }
+  } 
+
   const { queryStringParameters } = event;
-  const type = queryStringParameters.type;
-  const search = queryStringParameters?.search || '';
+  const type = queryStringParameters?.["type"];
+  const search = queryStringParameters?.["search"] || '';
 
   const sounds = await connection.execute(
       "SELECT * FROM audio WHERE type = ? AND name LIKE ? ORDER BY name",

@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Sound } from 'app/models/sound';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Sound } from 'src/app/models/sound';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class SoundsService {
 
   getSounds(name: string): Observable<Sound[]> {
     const params = new HttpParams().set('type', 'sound').set('search', name);
-    return this.api.get<Sound[]>('/.netlify/functions/audios', {
+    return this.api.get<Sound[]>('/api/audios', {
       params
     }).pipe(
       tap(() => this.loading$.next(false))
