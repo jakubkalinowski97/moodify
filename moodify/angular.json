@@ -36,7 +36,14 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "production": {              
+              "buildOptimizer": true,
+              "optimization": true,
+              "vendorChunk": false,
+              "extractLicenses": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
               "budgets": [
                 {
                   "type": "initial",
