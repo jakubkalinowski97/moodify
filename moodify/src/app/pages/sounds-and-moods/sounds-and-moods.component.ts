@@ -5,6 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './sounds-and-moods.component.html',
   styleUrls: ['./sounds-and-moods.component.scss']
 })
-export class SoundsAndMoodsComponent {
-
+export class SoundsAndMoodsComponent{
 }

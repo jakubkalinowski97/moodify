@@ -17,6 +17,8 @@ export class SoundsService {
   }
 
   getSounds(name: string): Observable<Sound[]> {
+    this.loading$.next(true);
+
     const params = new HttpParams().set('type', 'sound').set('search', name);
     return this.api.get<Sound[]>('/api/audios', {
       params

@@ -6,7 +6,6 @@ export const handler: Handler = withPlanetscale(async (event, context) => {
     planetscale: { connection },
   } = context;
 
-  
   if(!context.clientContext?.["identity"]) {
     return {
       statusCode: 401

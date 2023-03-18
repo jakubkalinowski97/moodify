@@ -8,11 +8,8 @@
   to = "/.netlify/functions/:splat"
   status = 200
   force = true
-  # signed = "API_JWS_TOKEN"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-

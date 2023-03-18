@@ -1,5 +1,5 @@
 <mat-drawer-container>
-  <mat-drawer [opened]="toolbarService.isOpened | async" mode="side">
+  <mat-drawer [opened]="toolbarService.isOpened$ | async" mode="side">
       <app-sidenav></app-sidenav>
   </mat-drawer>
   <app-main></app-main>

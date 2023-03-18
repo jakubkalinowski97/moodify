@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren, ViewContainerRef } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+
 import { AudioService } from '../../core/services/audio.service';
 import { Sound } from '../../models/sound';
 import { StreamState } from '../../models/stream-state';
 import { BackgroundMoodService } from './background-mood.service';
+import { MoodCardComponent } from './nested/mood-card/mood-card.component';
 
 @Component({
   selector: 'app-background-mood',
@@ -11,7 +13,7 @@ import { BackgroundMoodService } from './background-mood.service';
   styleUrls: ['./background-mood.component.scss'],
   providers: [AudioService]
 })
-export class BackgroundMoodComponent {
+export class BackgroundMoodComponent implements OnInit, AfterViewInit {
   moods = new Observable<Sound[]>();
   repeat$ = new Observable<boolean>();
   volume$ = new BehaviorSubject<number>(0.5);
@@ -19,11 +21,16 @@ export class BackgroundMoodComponent {
   state!: StreamState;
   currentFile!: Sound;
 
-  constructor(private audioService: AudioService, private backgroundMoodService: BackgroundMoodService) {}
+  @ViewChildren(MoodCardComponent) cards!: QueryList<MoodCardComponent>;
+  @ViewChildren(MoodCardComponent, { read: ElementRef }) cardsRef!: QueryList<ElementRef>;
+
+  constructor(private audioService: AudioService, private backgroundMoodService: BackgroundMoodService) { }
 
   ngOnInit(): void {
-    this.moods = this.backgroundMoodService.getMoods();
     this.loading$ = this.backgroundMoodService.getLoading();
+
+    this.moods = this.backgroundMoodService.getMoods();
+
     this.audioService.setRepeat(true);
     this.repeat$ = this.audioService.getRepeat();
 
@@ -31,12 +38,41 @@ export class BackgroundMoodComponent {
       this.state = state;
     });
   }
-  
+
+  ngAfterViewInit(): void {
+    this.applyFilters();
+
+  }
+
   setVolume(value: number): void {
     this.volume$.next(value);
   }
 
   toggleRepeat(): void {
     this.audioService.toggleRepeat();
+  }
+
+  private applyFilters() {
+    this.backgroundMoodService.getFilters().subscribe(filters => {
+      const cardElements = this.cards.map((card, index) => {
+        return {
+          ...card,
+          ...this.cardsRef.get(index)
+        }
+      });
+      if (filters.length === 0) {
+        cardElements.forEach((card) => {
+          card.nativeElement.style.display = 'block';
+        });
+      } else {
+        cardElements.forEach((card) => {
+          if (filters.some(filter => filter.id === card.data.subcategory_id)) {
+            card.nativeElement.style.display = 'block';
+          } else {
+            card.nativeElement.style.display = 'none';
+          }
+        });
+      }
+    });
   }
 }

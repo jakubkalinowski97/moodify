@@ -13,10 +13,12 @@ import { User } from 'netlify-identity-widget';
 export class ToolbarComponent implements OnInit {
   appVersion = packageJson.version;
   user$!: Observable<User | null>;
+  isAvailabilitySidenav$!: Observable<boolean>;
   constructor(private toolbarService: ToolbarService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.user$ = this.authService.getUser();
+    this.isAvailabilitySidenav$ = this.toolbarService.isAvailable$;
   }
 
   toggle(): void {

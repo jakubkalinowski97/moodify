@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Filter } from 'app/models/filter';
 import { Sound } from 'app/models/sound';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 
@@ -10,11 +11,30 @@ import { tap } from 'rxjs/operators';
 })
 export class BackgroundMoodService {
   private loading$ = new Subject<boolean>();
+  private selectedFilters$ = new BehaviorSubject<Filter[]>([]);
 
   constructor(private api: HttpClient) {}
 
   getLoading(): Observable<boolean> {
     return this.loading$.asObservable();
+  }
+
+  getFilters(): Observable<Filter[]> {
+    return this.selectedFilters$.asObservable();
+  }
+
+  toggleFilter(filter: Filter): void {
+    const currentFilters = this.selectedFilters$.value;
+
+    if (currentFilters.some((currentFilter) => currentFilter.id === filter.id)) {
+      this.selectedFilters$.next(
+        currentFilters.filter((filteredFilter) => filter.id !== filteredFilter.id)
+      )
+    } else {
+      this.selectedFilters$.next(
+        [...currentFilters, filter]
+      )
+    }
   }
 
   getMoods(): Observable<Sound[]> {

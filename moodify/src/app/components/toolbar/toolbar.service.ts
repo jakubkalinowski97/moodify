@@ -5,19 +5,27 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ToolbarService {
-  isOpened = new BehaviorSubject<boolean>(false);
+  isOpened$ = new BehaviorSubject<boolean>(false);
+  isAvailable$ = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
   open(): void {
-    this.isOpened.next(true);
+    this.isOpened$.next(true);
   }
 
   close(): void {
-    this.isOpened.next(false);
+    this.isOpened$.next(false);
   }
 
   toggle(): void {
-    this.isOpened.next(!this.isOpened.value);
+    this.isOpened$.next(!this.isOpened$.value);
+  }
+
+  setAvailability(value: boolean): void {
+    this.isAvailable$.next(value);
+    if(!value) {
+      this.close();
+    }
   }
 }

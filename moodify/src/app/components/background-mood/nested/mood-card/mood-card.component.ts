@@ -1,4 +1,4 @@
-import { Component, Input, OnInit,  } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { AudioService } from 'app/core/services/audio.service';
 import { Sound } from 'app/models/sound';
@@ -9,7 +9,7 @@ import { StreamState } from 'app/models/stream-state';
   styleUrls: ['./mood-card.component.scss'],
   providers: [AudioService]
 })
-export class MoodCardComponent implements OnInit {
+export class MoodCardComponent implements OnInit, OnDestroy {
   @Input() data!: Sound;
   @Input() repeat$!: Observable<boolean>;
   @Input() volumeMultiplier$!: Subject<number>;
@@ -38,6 +38,10 @@ export class MoodCardComponent implements OnInit {
     ]).subscribe(([volume, multiplier]) => {
         this.audioService.setVolumeWithMultiplier(volume * multiplier);
     })
+  }
+
+  ngOnDestroy(): void {
+      this.stop();
   }
 
   setVolume(value: number): void {

@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: 'sounds-and-moods/cthulhu',
     component: SoundsAndMoodsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { isAvailabilitySidenav: true }
   },
   {
     path: 'home',

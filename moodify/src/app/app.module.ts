@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +32,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminComponent } from './pages/admin/admin/admin.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { SpinnerComponent } from './core/components/spinner/spinner.component';
+import { FiltersComponent } from './components/background-mood/nested/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,9 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     SoundsAndMoodsComponent,
     SearchInputComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    SpinnerComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +68,8 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     MatCardModule,
     MatSliderModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
   providers: [
     AudioService,
