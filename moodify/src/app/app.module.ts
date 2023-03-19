@@ -30,7 +30,6 @@ import { AudioService } from './core/services/audio.service';
 import { SearchInputComponent } from './core/components/search-input/search-input.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AdminComponent } from './pages/admin/admin/admin.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { SpinnerComponent } from './core/components/spinner/spinner.component';
 import { FiltersComponent } from './components/background-mood/nested/filters/filters.component';
@@ -52,7 +51,6 @@ import { FiltersComponent } from './components/background-mood/nested/filters/fi
     SoundsAndMoodsComponent,
     SearchInputComponent,
     LoginComponent,
-    AdminComponent,
     SpinnerComponent,
     FiltersComponent
   ],
