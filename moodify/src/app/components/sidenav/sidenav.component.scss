@@ -1,7 +1,36 @@
 :host {
+    position: relative;
     display: flex;
+    flex-direction: column;
     width: 200px;
     height: 100%;
-    padding: 10px 20px;
+    padding: 0px 16px 10px 16px;
     overflow: hidden;
+    transition: 0.2s;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 64px;
+        padding: 10px 0;
+        .close-sidenav-button {
+            display: none;
+        }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    :host {
+        width: 100vw;
+        height: 100vh;
+        opacity: 0.6;
+
+        .header {
+            .close-sidenav-button {
+                display: block;
+            }
+        }
+    }
+
 }

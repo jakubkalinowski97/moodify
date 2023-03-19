@@ -20,6 +20,7 @@ $toolbar-height: 50px;
 mat-toolbar {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     height: 50px;
     background: mat.get-color-from-palette(palettes.$teal-palette, 700);
     font-size: medium;

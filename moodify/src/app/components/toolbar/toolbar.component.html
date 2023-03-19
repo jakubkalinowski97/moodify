@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <button *ngIf="isAvailabilitySidenav$ | async" mat-icon-button (click)="toggle()">
+  <button class="sidenav-button" *ngIf="isAvailabilitySidenav$ | async" mat-icon-button (click)="toggle()">
     <mat-icon>menu</mat-icon>
   </button>
   <span>Moodify ({{appVersion}})</span>
