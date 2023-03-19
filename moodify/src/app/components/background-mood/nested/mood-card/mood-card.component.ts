@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { AudioService } from 'app/core/services/audio.service';
-import { Sound } from 'app/models/sound';
-import { StreamState } from 'app/models/stream-state';
+import { Sound } from 'app/core/models/sound';
+import { StreamState } from 'app/core/models/stream-state';
 @Component({
   selector: 'app-mood-card',
   templateUrl: './mood-card.component.html',

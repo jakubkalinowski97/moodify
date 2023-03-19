@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Filter } from 'app/models/filter';
+import { Filter } from 'app/core/models/filter';
 import { BackgroundMoodService } from '../../background-mood.service';
 
 @Component({

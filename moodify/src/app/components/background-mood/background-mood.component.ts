@@ -2,8 +2,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, Vie
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { AudioService } from '../../core/services/audio.service';
-import { Sound } from '../../models/sound';
-import { StreamState } from '../../models/stream-state';
+import { Sound } from '../../core/models/sound';
+import { StreamState } from '../../core/models/stream-state';
 import { BackgroundMoodService } from './background-mood.service';
 import { MoodCardComponent } from './nested/mood-card/mood-card.component';
 

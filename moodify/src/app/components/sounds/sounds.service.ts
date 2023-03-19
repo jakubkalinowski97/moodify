@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Sound } from 'app/models/sound';
+import { Sound } from 'app/core/models/sound';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 

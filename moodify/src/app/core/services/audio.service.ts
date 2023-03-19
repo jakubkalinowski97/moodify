@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AudioEvents } from 'app/models/audio-events.enum';
-import { StreamState } from 'app/models/stream-state';
+import { AudioEvents } from 'app/core/models/audio-events.enum';
+import { StreamState } from 'app/core/models/stream-state';
 import { formatDuration } from 'date-fns';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 
