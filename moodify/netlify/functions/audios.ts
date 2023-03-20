@@ -1,5 +1,6 @@
 import { Handler } from "@netlify/functions";
 import { withPlanetscale } from "@netlify/planetscale";
+import { getPresignedUrl } from "../utils/getPresignedUrl";
 
 export const handler: Handler = withPlanetscale(async (event, context) => {
   const {
@@ -21,7 +22,13 @@ export const handler: Handler = withPlanetscale(async (event, context) => {
       [type, `%${search}%`]
      );
     
-  const data = sounds.rows;
+  
+  const data = sounds.rows.map((row: any) => {
+    return {
+      ...row,
+      audio_url: getPresignedUrl(row.audio_url)
+    }
+  });
 
   const parsedData = JSON.stringify(data);
 

@@ -24,6 +24,7 @@
     "@netlify/functions": "^1.4.0",
     "@netlify/planetscale": "^1.0.0",
     "@planetscale/database": "^1.6.0",
+    "aws-sdk": "^2.1338.0",
     "date-fns": "^2.29.3",
     "netlify-identity-widget": "^1.9.2",
     "rxjs": "7.8.0",
