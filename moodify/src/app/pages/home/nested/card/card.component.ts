@@ -9,7 +9,6 @@ export class CardComponent {
   @Input() title: string = '';
   @Input() subtitle: string = '';
   @Input() imgSrc: string = '';
-  @Input() description: string = '';
   @Input() disabled: boolean = false;
   @Input() href: string = '';
 }
