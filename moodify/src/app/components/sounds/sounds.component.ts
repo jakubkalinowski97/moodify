@@ -29,7 +29,6 @@ export class SoundsComponent implements OnInit {
     this.audioService.getState().subscribe((state) => {
       this.state = state;
     });
-
   }
 
   indentify(_index: number, item: Sound): number {

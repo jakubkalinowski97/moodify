@@ -27,8 +27,7 @@ export class BackgroundMoodComponent implements OnInit, AfterViewInit {
   constructor(private audioService: AudioService, private backgroundMoodService: BackgroundMoodService) { }
 
   ngOnInit(): void {
-    this.loading$ = this.backgroundMoodService.getLoading();
-
+    this.loading$ = this.backgroundMoodService.getLoading(); // TODO - not working
     this.moods = this.backgroundMoodService.getMoods();
 
     this.audioService.setRepeat(true);
