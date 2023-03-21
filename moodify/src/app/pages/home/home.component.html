@@ -13,6 +13,7 @@
         [href]="'/sounds-and-moods/witcher'"
     ></app-card>
     <app-card
+        *ngIf="isAdmin$ | async"
         [title]="'Admin'"
         [subtitle]="'panel administratora'"
         [imgSrc]="'assets/admin-card.jpg'"
