@@ -21,14 +21,14 @@ export class AuthService {
   private handleNetlifyEvents(): void {
     netlifyIdentity.on('init', (user) => {
       this.user$.next(user);
-      this.isAdmin$.next(user?.app_metadata.roles.includes('admin') || false);
+      this.isAdmin$.next(user?.app_metadata?.roles.includes('admin') || false);
       this.user = user;
     });
 
     netlifyIdentity.on('login', (user) => {
         this.user$.next(user);
         this.user = user;
-        this.isAdmin$.next(user?.app_metadata.roles.includes('admin') || false);
+        this.isAdmin$.next(user?.app_metadata?.roles.includes('admin') || false);
         this.closeLoginModal();
         this.router.navigate(['/']);
     });
