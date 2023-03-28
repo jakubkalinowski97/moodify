@@ -37,10 +37,12 @@ export class BackgroundMoodService {
     }
   }
 
-  getMoods(): Observable<Sound[]> {
+  getMoods(categoryId: number): Observable<Sound[]> {
     this.loading$.next(true);
 
-    const params = new HttpParams().set('type', 'mood');
+    const params = new HttpParams()
+      .set('type', 'mood')
+      .set('categoryId', categoryId);
     return this.api.get<Sound[]>('/api/audios', {
       params
     }).pipe(

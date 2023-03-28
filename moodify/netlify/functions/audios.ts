@@ -15,11 +15,14 @@ export const handler: Handler = withPlanetscale(async (event, context) => {
 
   const { queryStringParameters } = event;
   const type = queryStringParameters?.["type"];
+  const categoryId = queryStringParameters?.["categoryId"];
   const search = queryStringParameters?.["search"] || '';
 
+  console.log(type, categoryId, search);
+
   const sounds = await connection.execute(
-      "SELECT * FROM audio WHERE type = ? AND name LIKE ? ORDER BY name",
-      [type, `%${search}%`]
+      "SELECT * FROM audio WHERE type = ? AND category_id = ? AND name LIKE ? ORDER BY name",
+      [type, categoryId, `%${search}%`]
      );
     
   

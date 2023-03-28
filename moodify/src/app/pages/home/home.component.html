@@ -1,16 +1,10 @@
 <div class="container">
     <app-card
-        [title]="'Zew Cthulhu'"
+        *ngFor="let category of categories$ | async"
+        [title]="category.name"
         [subtitle]="'zestaw dźwięków'"
-        [imgSrc]="'assets/cthulhu-default.jpeg'"
-        [href]="'/sounds-and-moods/cthulhu'"
-    ></app-card>
-    <app-card
-        [title]="'Wiedźmin'"
-        [subtitle]="'zestaw dźwięków'"
-        [imgSrc]="'assets/witcher-default.webp'"
-        [disabled]="true"
-        [href]="'/sounds-and-moods/witcher'"
+        [imgSrc]="category.poster_url ? category.poster_url : 'assets/cthulhu-default.jpeg'"
+        [href]="'/sounds-and-moods/' + category.id"
     ></app-card>
     <app-card
         *ngIf="isAdmin$ | async"

@@ -12,7 +12,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'sounds-and-moods/cthulhu',
+    path: 'sounds-and-moods/:categoryId',
     component: SoundsAndMoodsComponent,
     canActivate: [AuthGuard],
     data: { isAvailabilitySidenav: true }

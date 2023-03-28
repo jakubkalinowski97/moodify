@@ -16,10 +16,13 @@ export class SoundsService {
     return this.loading$.asObservable();
   }
 
-  getSounds(name: string): Observable<Sound[]> {
+  getSounds(name: string, categoryId: number): Observable<Sound[]> {
     this.loading$.next(true);
 
-    const params = new HttpParams().set('type', 'sound').set('search', name);
+    const params = new HttpParams()
+      .set('type', 'sound')
+      .set('search', name)
+      .set('categoryId', categoryId);;
     return this.api.get<Sound[]>('/api/audios', {
       params
     }).pipe(

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AudioService } from 'app/core/services/audio.service';
 import { Sound } from 'app/core/models/sound';
 import { StreamState } from 'app/core/models/stream-state';
-import { BehaviorSubject, Observable} from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { SoundsService } from './sounds.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sounds',
@@ -19,7 +20,7 @@ export class SoundsComponent implements OnInit {
   state!: StreamState;
   currentFile!: Sound;
 
-  constructor(private soundsService: SoundsService, private audioService: AudioService) {}
+  constructor(private soundsService: SoundsService, private audioService: AudioService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.loading$ = this.soundsService.getLoading();
@@ -53,10 +54,10 @@ export class SoundsComponent implements OnInit {
   }
 
   private handleSearch(): void {
-    this.sounds = this.searchValue$.pipe(
+    this.sounds = combineLatest([this.searchValue$, this.activatedRoute.params]).pipe(
       debounceTime(500),
       distinctUntilChanged(),
-      switchMap((name) => this.soundsService.getSounds(name))
+      switchMap(([name, params]) => this.soundsService.getSounds(name, params['categoryId']))
     )
   }
 
