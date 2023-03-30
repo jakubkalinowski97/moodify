@@ -1,6 +1,6 @@
 <ng-container>
     <div class="header">
-        <span class="user" *ngIf="user">{{user.email}}</span>
+        <span class="user" *ngIf="(user$ | async) as user">{{user.email}}</span>
         <button (click)="closeSidenav()" mat-icon-button class="close-sidenav-button">
             <mat-icon>close</mat-icon>
         </button>

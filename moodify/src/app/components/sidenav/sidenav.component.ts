@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/core/services/auth.service';
 import { User } from 'netlify-identity-widget';
+import { Observable } from 'rxjs';
 import { ToolbarService } from '../toolbar/toolbar.service';
 
 @Component({
@@ -9,15 +10,12 @@ import { ToolbarService } from '../toolbar/toolbar.service';
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit {
-  user!: User;
+  user$!: Observable<User | null>;
 
   constructor(private toolbarService: ToolbarService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    const user = this.authService.getUserRaw();
-    if (user) {
-      this.user = user;
-    }
+    this.user$ = this.authService.getUser();
   }
 
   closeSidenav(): void {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import netlifyIdentity, { User } from 'netlify-identity-widget';
-import { Observable, map, Subject, tap } from 'rxjs';
+import { Observable, map, Subject, tap, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
 
@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private user$ = new Subject<User | null>();
+  private user$ = new BehaviorSubject<User | null>(null);
   private user!: User | null;
   private inviteToken: string = '';
-  private isAdmin$ = new Subject<boolean>();
+  private isAdmin$ = new BehaviorSubject<boolean>(false);
 
   constructor(private router: Router) { 
     this.handleNetlifyEvents();
@@ -80,5 +80,11 @@ export class AuthService {
 
   getInviteToken(): string {
     return this.inviteToken;
+  }
+
+  logout(): void {
+    netlifyIdentity.logout();
+    this.router.navigate(['/']);
+    this.showLoginModal();
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToolbarService } from './toolbar.service';
 import packageJson from '../../../../package.json';
 import { AuthService } from '../../core/services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { User } from 'netlify-identity-widget';
 
 @Component({
@@ -17,11 +17,15 @@ export class ToolbarComponent implements OnInit {
   constructor(private toolbarService: ToolbarService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.user$ = this.authService.getUser();
+    this.user$ = this.authService.getUser().pipe(tap(console.log));
     this.isAvailabilitySidenav$ = this.toolbarService.isAvailable$;
   }
 
   toggle(): void {
     this.toolbarService.toggle();
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }
