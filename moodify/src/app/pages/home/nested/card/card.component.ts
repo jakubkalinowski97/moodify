@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, Renderer2 } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -6,8 +6,6 @@ import { Component, HostListener, Input, Renderer2 } from '@angular/core';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
-
-  constructor(private renderer: Renderer2) {}
 
   @HostListener('mouseover', ['$event'])
   onHover() {

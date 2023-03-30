@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren, ViewContainerRef } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 
-import { AudioService } from '../../core/services/audio.service';
-import { Sound } from '../../core/models/sound';
-import { StreamState } from '../../core/models/stream-state';
 import { BackgroundMoodService } from './background-mood.service';
 import { MoodCardComponent } from './nested/mood-card/mood-card.component';
 import { ActivatedRoute } from '@angular/router';
+import { Sound } from 'app/core/models/sound';
+import { AudioService } from 'app/core/services/audio.service';
+import { StreamState } from 'app/core/models/stream-state';
 
 @Component({
   selector: 'app-background-mood',

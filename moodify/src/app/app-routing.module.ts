@@ -23,9 +23,14 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
+  },
+  {
     path: '*',
     redirectTo: '/home'
   },
+  { path: 'sound-and-moods', loadChildren: () => import('./pages/sounds-and-moods/sound-and-moods/sound-and-moods.module').then(m => m.SoundAndMoodsModule) },
   {
     path: '**',
     redirectTo: '/home'
