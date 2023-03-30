@@ -17,7 +17,6 @@ export class ToolbarComponent implements OnInit {
   constructor(private toolbarService: ToolbarService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.user$ = this.authService.getUser().pipe(tap(console.log));
     this.isAvailabilitySidenav$ = this.toolbarService.isAvailable$;
   }
 
