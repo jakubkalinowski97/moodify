@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToolbarService } from './toolbar.service';
-import packageJson from '../../../../package.json';
-import { AuthService } from '../../core/services/auth.service';
-import { Observable, tap } from 'rxjs';
+import packageJson from '../../../../../package.json';
+import { Observable } from 'rxjs';
 import { User } from 'netlify-identity-widget';
+import { AuthService } from 'app/core/services/auth.service';
 
 @Component({
   selector: 'app-toolbar',

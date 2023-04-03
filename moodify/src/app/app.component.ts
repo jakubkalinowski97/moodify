@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivationStart, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
-import { ToolbarService } from './components/toolbar/toolbar.service';
+import { ToolbarService } from './core/components/toolbar/toolbar.service';
 
 @Component({
   selector: 'app-root',

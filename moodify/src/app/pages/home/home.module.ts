@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { CardComponent } from './nested/card/card.component';
 import { CoreModule } from 'app/core/core.module';
+import { HomeRoutingModule } from './home-routing.module';
 
 
 
@@ -13,7 +14,8 @@ import { CoreModule } from 'app/core/core.module';
   ],
   imports: [
     CommonModule,
-    CoreModule
+    CoreModule,
+    HomeRoutingModule
   ]
 })
 export class HomeModule { }

@@ -12,17 +12,34 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { ItemComponent } from './components/sidenav/nested/item/item.component';
+import { MainComponent } from './main/main.component';
+import { PageContainerComponent } from './page-container/page-container.component';
+import { AppRoutingModule } from 'app/app-routing.module';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
   declarations: [
     SearchInputComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SidenavComponent,
+    ToolbarComponent,
+    ItemComponent,
+    MainComponent,
+    PageContainerComponent
   ],
   imports: [
     CommonModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
+    RouterModule,
+    MatButtonModule
   ],
   exports: [
     CommonModule,
@@ -38,7 +55,10 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     NgOptimizedImage,
     MatTabsModule,
     SearchInputComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SidenavComponent,
+    ToolbarComponent,
+    MainComponent
   ]
 })
 export class CoreModule { }
