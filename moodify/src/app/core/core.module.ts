@@ -10,6 +10,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -17,7 +19,6 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ItemComponent } from './components/sidenav/nested/item/item.component';
 import { MainComponent } from './main/main.component';
 import { PageContainerComponent } from './page-container/page-container.component';
-import { AppRoutingModule } from 'app/app-routing.module';
 import { RouterModule } from '@angular/router';
 
 
@@ -50,10 +51,12 @@ import { RouterModule } from '@angular/router';
     MatCardModule,
     MatSliderModule,
     MatInputModule,
+    MatCheckboxModule,
     MatProgressSpinnerModule,
     MatChipsModule,
     NgOptimizedImage,
     MatTabsModule,
+    MatTableModule,
     SearchInputComponent,
     SpinnerComponent,
     SidenavComponent,

@@ -18,13 +18,18 @@ export const handler: Handler = withPlanetscale(async (event, context) => {
   const categoryId = queryStringParameters?.["categoryId"];
   const search = queryStringParameters?.["search"] || '';
 
-  console.log(type, categoryId, search);
+  let sounds;
 
-  const sounds = await connection.execute(
+  if(type === 'all') {
+    sounds = await connection.execute(
+      "SELECT audio.name, category.name as category, subcategory.name as subcategory, audio.audio_url FROM audio INNER JOIN category ON audio.category_id = category.id LEFT JOIN subcategory ON subcategory.subcategory_id = audio.subcategory_id"
+    )
+  } else {
+    sounds = await connection.execute(
       "SELECT * FROM audio WHERE type = ? AND category_id = ? AND name LIKE ? ORDER BY name",
       [type, categoryId, `%${search}%`]
-     );
-    
+    );
+  }
   
   const data = sounds.rows.map((row: any) => {
     return {

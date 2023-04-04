@@ -4,13 +4,15 @@ import { FileUploaderComponent } from './nested-components/file-uploader/file-up
 import { AdminPanelComponent } from './admin-panel.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { CoreModule } from 'app/core/core.module';
+import { SoundsTableComponent } from './nested-components/sounds-table/sounds-table.component';
 
 
 
 @NgModule({
   declarations: [
     FileUploaderComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    SoundsTableComponent
   ],
   imports: [
     CommonModule,
