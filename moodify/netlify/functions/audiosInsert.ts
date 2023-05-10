@@ -41,20 +41,20 @@ export const handler: Handler = withPlanetscale(async (event, context) => {
 
         const s3 = new AWS.S3();
 
-        // const uploadedFile = await s3.upload({
-        //     Bucket: BUCKET,
-        //     Key: name,
-        //     Body: file.content
-        // }).promise();
+        const uploadedFile = await s3.upload({
+            Bucket: BUCKET,
+            Key: file.filename,
+            Body: file.content
+        }).promise();
 
-        // await connection.execute("INSERT INTO audio (name, audio_url, type, category_id, subcategory_id, isVisible) VALUES(?, ?, ?, ?, ?, ?)", [
-        //     name,
-        //     uploadedFile.Location,
-        //     type,
-        //     category_id,
-        //     subcategory_id,
-        //     isVisible
-        // ]);
+        await connection.execute("INSERT INTO audio (name, audio_url, type, category_id, subcategory_id, isVisible) VALUES(?, ?, ?, ?, ?, ?)", [
+            name,
+            uploadedFile.Location,
+            type,
+            category_id,
+            subcategory_id,
+            isVisible
+        ]);
         
         return {
             statusCode: 200
@@ -100,8 +100,12 @@ function parseMultipartForm(event: any): Promise<NewSound> {
         });
 
         bb.on('field', (name, val) => {
-            sound[name] = val;
-            console.log(name, val);
+            if (val === 'null') {
+                sound[name] = null;
+            } else {
+                sound[name] = val;
+                console.log(name, val);
+            }
         });
 
         bb.on('close', () => {
