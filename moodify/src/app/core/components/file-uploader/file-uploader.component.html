@@ -1,0 +1,9 @@
+<div class="file-upload">
+    <input type="file" class="file-input" #fileUpload>
+
+    <span>{{file ? file.name : "Nie załadowano jeszcze pliku"}}</span>
+
+    <button type="button" mat-mini-fab color="primary" class="button-upload" (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+    </button>
+</div>

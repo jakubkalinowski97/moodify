@@ -1,0 +1,24 @@
+<form [formGroup]="newSoundForm" (ngSubmit)="submit()">
+    <label for="name">Nazwa</label>
+    <input [ngClass]="{'form__input--invalid': newSoundForm.controls['name'].invalid && newSoundForm.controls['name'].touched}" class="form__input" id="name" formControlName="name">
+    <label for="name">Typ dźwięku</label>
+    <select [ngClass]="{'form__input--invalid': newSoundForm.controls['type'].invalid && newSoundForm.controls['type'].touched}" class="form__input form__select" id="type" formControlName="type">
+        <option value="sound">Dźwięk</option>
+        <option value="mood">Nastrój</option>
+    </select>
+    <label for="name">Kategoria</label>
+    <select [ngClass]="{'form__input--invalid': newSoundForm.controls['category_id'].invalid && newSoundForm.controls['category_id'].touched}" class="form__input form__select" id="category_id" formControlName="category_id">
+        <option value="1">Zew Cthulhu</option>
+        <option value="2">Wiedźmin</option>
+    </select>
+    <ng-container *ngIf="isMood"></ng-container>
+    <label for="name">Podkategoria</label>
+    <select [ngClass]="{'form__input--invalid': newSoundForm.controls['subcategory_id'].invalid && newSoundForm.controls['subcategory_id'].touched}" class="form__input form__select" id="subcategory_id" formControlName="subcategory_id">
+        <option value="1">Otoczenie</option>
+        <option value="3">Pogoda</option>
+        <option value="4">Muzyka</option>
+        <option value="5">Podróż</option>
+    </select>
+    <app-file-uploader formControlName="file"></app-file-uploader>
+    <button [disabled]="!newSoundForm.valid" mat-button type="submit">Zapisz</button>
+</form>

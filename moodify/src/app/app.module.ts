@@ -9,8 +9,6 @@ import { AudioService } from './core/services/audio.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { CoreModule } from './core/core.module';
-import { SoundsAndMoodsModule } from './pages/sounds-and-moods/sounds-and-moods.module';
-import { HomeModule } from './pages/home/home.module';
 import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
@@ -23,9 +21,7 @@ import { LoginComponent } from './pages/login/login.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    CoreModule,
-    SoundsAndMoodsModule,
-    HomeModule
+    CoreModule
   ],
   providers: [
     AudioService,

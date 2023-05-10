@@ -4,4 +4,5 @@ export interface Sound {
     id: number;
     category_id: number;
     subcategory_id: number;
+    isVisible: boolean;
 }

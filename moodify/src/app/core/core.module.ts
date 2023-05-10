@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -11,7 +13,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -19,7 +23,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ItemComponent } from './components/sidenav/nested/item/item.component';
 import { MainComponent } from './main/main.component';
 import { PageContainerComponent } from './page-container/page-container.component';
-import { RouterModule } from '@angular/router';
+import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 
 
 
@@ -31,7 +35,8 @@ import { RouterModule } from '@angular/router';
     ToolbarComponent,
     ItemComponent,
     MainComponent,
-    PageContainerComponent
+    PageContainerComponent,
+    FileUploaderComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +49,7 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     CommonModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
@@ -57,11 +63,14 @@ import { RouterModule } from '@angular/router';
     NgOptimizedImage,
     MatTabsModule,
     MatTableModule,
+    MatSelectModule,
+    MatDividerModule,
     SearchInputComponent,
     SpinnerComponent,
     SidenavComponent,
     ToolbarComponent,
-    MainComponent
+    MainComponent,
+    FileUploaderComponent
   ]
 })
 export class CoreModule { }

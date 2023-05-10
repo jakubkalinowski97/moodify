@@ -49,6 +49,30 @@ body {
     background-color: black;
 }
 
+.form__input {
+    height: 30px;
+    width: 100%;
+    border-radius: 25px;
+    border: none;
+    outline: transparent;
+    color: mat.get-color-from-palette(palettes.$teal-palette, 900);
+    background: mat.get-color-from-palette(palettes.$teal-palette, 100);
+    padding: 0 15px;
+    font-family: 'Roboto';
+
+    &:focus {
+        outline: 2px mat.get-color-from-palette(palettes.$teal-palette, 900) solid;
+    }
+
+    &--invalid {
+      outline: 2px rgb(255, 79, 79) solid;
+    }
+}
+
+.form__select {
+  border-right: 10px solid transparent
+}
+
 body::before {
   backdrop-filter: blur(10px);
   background-color: rgba(mat.get-color-from-palette(palettes.$teal-palette, 700), 0.2);

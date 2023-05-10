@@ -22,11 +22,11 @@ export const handler: Handler = withPlanetscale(async (event, context) => {
 
   if(type === 'all') {
     sounds = await connection.execute(
-      "SELECT audio.name, category.name as category, subcategory.name as subcategory, audio.audio_url FROM audio INNER JOIN category ON audio.category_id = category.id LEFT JOIN subcategory ON subcategory.subcategory_id = audio.subcategory_id"
+      "SELECT audio.id, audio.name, audio.isVisible, category.name as category, subcategory.name as subcategory, audio.audio_url FROM audio INNER JOIN category ON audio.category_id = category.id LEFT JOIN subcategory ON subcategory.subcategory_id = audio.subcategory_id ORDER BY audio.name"
     )
   } else {
     sounds = await connection.execute(
-      "SELECT * FROM audio WHERE type = ? AND category_id = ? AND name LIKE ? ORDER BY name",
+      "SELECT * FROM audio WHERE type = ? AND category_id = ? AND name LIKE ? AND isVisible = true ORDER BY name",
       [type, categoryId, `%${search}%`]
     );
   }
