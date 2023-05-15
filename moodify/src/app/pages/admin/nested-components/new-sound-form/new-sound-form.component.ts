@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AdminService } from '../../admin.service';
 import { NewSound } from 'app/core/models/new-sound';
 import { HttpEventType } from '@angular/common/http';
-import { distinctUntilKeyChanged } from 'rxjs';
+import { distinctUntilKeyChanged, tap } from 'rxjs';
 
 @Component({
   selector: 'app-new-sound-form',
@@ -28,12 +28,11 @@ export class NewSoundFormComponent implements OnInit {
   ngOnInit(): void {
     this.newSoundForm.valueChanges
       .pipe(
-        distinctUntilKeyChanged('type')
-      )
-      .subscribe((data) => {
-        console.log(data);
-        this.toggleSubcategoryField(data as NewSound);
-    });
+        distinctUntilKeyChanged('type'),
+        tap((data) => {
+          this.toggleSubcategoryField(data as NewSound);
+        })
+      ).subscribe();
   }
 
   submit(): void {
@@ -58,12 +57,14 @@ export class NewSoundFormComponent implements OnInit {
     } else {
       this.hideSubcategoryField();
     }
+    this.newSoundForm.updateValueAndValidity();
   }
 
   private showSubcategoryField(): void {
     const subcategory = this.newSoundForm.controls['subcategory_id'];
     subcategory.enable();
-    subcategory.setValue(null); // włączenie kontrolki powinno rewalidować formularz TODO
+    subcategory.addValidators(Validators.required);
+    subcategory.setValue(null);
   }
 
   private hideSubcategoryField(): void {
