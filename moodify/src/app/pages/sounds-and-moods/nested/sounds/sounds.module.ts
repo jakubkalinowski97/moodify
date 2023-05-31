@@ -8,8 +8,6 @@ import { SoundsComponent } from "./sounds.component";
 import { SoundsEffects } from "./state/sounds.effects";
 import { soundsFeatureKey, soundsReducer } from "./state/sounds.reducer";
 
-
-
 @NgModule({
   declarations: [
     SoundsComponent,
@@ -19,7 +17,7 @@ import { soundsFeatureKey, soundsReducer } from "./state/sounds.reducer";
     CommonModule,
     CoreModule,
     StoreModule.forFeature(soundsFeatureKey, soundsReducer),
-    EffectsModule.forFeature([SoundsEffects])
+    EffectsModule.forFeature(SoundsEffects)
   ],
   exports: [
     SoundsComponent

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren, ViewContainerRef } from '@angular/core';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 
 import { BackgroundMoodService } from './background-mood.service';
 import { MoodCardComponent } from './nested/mood-card/mood-card.component';
@@ -7,6 +7,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Sound } from 'app/core/models/sound';
 import { AudioService } from 'app/core/services/audio.service';
 import { StreamState } from 'app/core/models/stream-state';
+import { Store } from '@ngrx/store';
+import { BackgroundMoodsActions } from './state/background-mood.actions';
+import { selectBackgroundMoods } from './state/background-mood.selectors';
 
 @Component({
   selector: 'app-background-mood',
@@ -25,14 +28,13 @@ export class BackgroundMoodComponent implements OnInit, AfterViewInit {
   @ViewChildren(MoodCardComponent) cards!: QueryList<MoodCardComponent>;
   @ViewChildren(MoodCardComponent, { read: ElementRef }) cardsRef!: QueryList<ElementRef>;
 
-  constructor(private audioService: AudioService, private backgroundMoodService: BackgroundMoodService, private activatedRoute: ActivatedRoute) { }
+  constructor(private audioService: AudioService, private backgroundMoodService: BackgroundMoodService, private activatedRoute: ActivatedRoute, private store: Store) { }
 
   ngOnInit(): void {
     this.loading$ = this.backgroundMoodService.getLoading(); // TODO - not working
-    this.moods = this.activatedRoute.params
-      .pipe(
-        switchMap((params) => this.backgroundMoodService.getMoods(params['categoryId']))
-      );
+    
+    this.handleMoods();
+    this.moods = this.store.select(selectBackgroundMoods);
 
     this.audioService.setRepeat(true);
     this.repeat$ = this.audioService.getRepeat();
@@ -58,7 +60,15 @@ export class BackgroundMoodComponent implements OnInit, AfterViewInit {
     this.audioService.toggleRepeat();
   }
 
-  private applyFilters() {
+  private handleMoods(): void {
+    this.activatedRoute.params
+      .pipe(
+        tap(({categoryId}) => this.store.dispatch(BackgroundMoodsActions.loadMoods({categoryId})))
+      )
+      .subscribe()
+  }
+
+  private applyFilters(): void {
     this.backgroundMoodService.getFilters().subscribe(filters => {
       const cardElements = this.cards.map((card, index) => {
         return {

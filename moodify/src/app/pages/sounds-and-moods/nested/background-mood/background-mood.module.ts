@@ -1,9 +1,12 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { CoreModule } from "app/core/core.module";
-import { SoundsAndMoodsRoutingModule } from "../../sounds-and-moods-routing.module";
 import { BackgroundMoodComponent } from "./background-mood.component";
 import { MoodCardComponent } from "./nested/mood-card/mood-card.component";
+import { StoreModule } from '@ngrx/store';
+import { backgroundMoodsFeatureKey, backgroundMoodsReducer } from "./state/background-mood.reducer";
+import { EffectsModule } from "@ngrx/effects";
+import { BackgroundMoodsEffects } from "./state/background-mood.effects";
 
 @NgModule({
   declarations: [
@@ -12,8 +15,9 @@ import { MoodCardComponent } from "./nested/mood-card/mood-card.component";
   ],
   imports: [
     CommonModule,
-    SoundsAndMoodsRoutingModule,
-    CoreModule
+    CoreModule,
+    StoreModule.forFeature(backgroundMoodsFeatureKey, backgroundMoodsReducer),
+    EffectsModule.forFeature(BackgroundMoodsEffects)
   ],
   exports: [
     BackgroundMoodComponent
