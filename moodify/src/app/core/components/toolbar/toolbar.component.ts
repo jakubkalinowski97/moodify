@@ -3,7 +3,10 @@ import { ToolbarService } from './toolbar.service';
 import packageJson from '../../../../../package.json';
 import { Observable } from 'rxjs';
 import { User } from 'netlify-identity-widget';
-import { AuthService } from 'app/core/services/auth.service';
+import { Store } from '@ngrx/store';
+import { selectUser } from 'app/pages/login/state/login.selectors';
+import { LoginActions } from 'app/pages/login/state/login.actions';
+import { AuthState } from 'app/pages/login/state/login.state';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,11 +16,13 @@ import { AuthService } from 'app/core/services/auth.service';
 export class ToolbarComponent implements OnInit {
   appVersion = packageJson.version;
   user$!: Observable<User | null>;
+  test!: any;
   isAvailabilitySidenav$!: Observable<boolean>;
-  constructor(private toolbarService: ToolbarService, private authService: AuthService) {}
+  constructor(private toolbarService: ToolbarService, private store: Store<AuthState>) {}
 
   ngOnInit(): void {
     this.isAvailabilitySidenav$ = this.toolbarService.isAvailable$;
+    this.user$ = this.store.select(selectUser);
   }
 
   toggle(): void {
@@ -25,6 +30,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.logout();
+    this.store.dispatch(LoginActions.logout());
   }
 }

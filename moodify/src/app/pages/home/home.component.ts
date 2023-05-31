@@ -1,8 +1,9 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Category } from 'app/core/models/category';
-import { AuthService } from 'app/core/services/auth.service';
 import { Observable, tap } from 'rxjs';
 import { CategoryService } from './services/category.service';
+import { Store } from '@ngrx/store';
+import { selectIsAdmin } from '../login/state/login.selectors';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +13,10 @@ import { CategoryService } from './services/category.service';
 export class HomeComponent implements OnInit{
   isAdmin$!: Observable<boolean>;
   categories$!: Observable<Category[]>;
-  constructor(private authService: AuthService, private categoryService: CategoryService) {}
+  constructor(private store: Store, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    this.isAdmin$ = this.authService.isAdmin();
+    this.isAdmin$ = this.store.select(selectIsAdmin)
     this.categories$ = this.categoryService.getCategories().pipe(
       tap(categories => document.body.style.backgroundImage = `url(${categories.at(0)?.poster_url})`)
     );

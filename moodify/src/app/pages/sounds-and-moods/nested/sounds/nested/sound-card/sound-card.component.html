@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="(state$ | async) as state">
   <mat-card-header>
     <mat-card-title>
         {{data.name}}

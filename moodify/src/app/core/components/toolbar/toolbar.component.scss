@@ -11,5 +11,10 @@
             align-items: center;
             margin-left: auto;
         }
+
+        .logo {
+            color: mat.get-color-from-palette(palettes.$teal-palette, 100);
+            text-decoration: none;
+        }
     }
 }

@@ -17,7 +17,7 @@
 <app-spinner [loading$]="loading$"></app-spinner>
 <div *ngIf="(moods | async) as moodsList" class="container">
     <app-mood-card 
-    *ngFor="let item of moodsList" 
+    *ngFor="let item of moodsList; trackBy:indentify" 
     [data]="item"
     [repeat$]="repeat$"
     [volumeMultiplier$]="volume$"

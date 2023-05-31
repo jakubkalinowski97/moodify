@@ -24,6 +24,7 @@ import { ItemComponent } from './components/sidenav/nested/item/item.component';
 import { MainComponent } from './main/main.component';
 import { PageContainerComponent } from './page-container/page-container.component';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
+import { LoginModule } from 'app/pages/login/login.module';
 
 
 
@@ -45,7 +46,8 @@ import { FileUploaderComponent } from './components/file-uploader/file-uploader.
     MatProgressSpinnerModule,
     MatToolbarModule,
     RouterModule,
-    MatButtonModule
+    MatButtonModule,
+    LoginModule
   ],
   exports: [
     CommonModule,

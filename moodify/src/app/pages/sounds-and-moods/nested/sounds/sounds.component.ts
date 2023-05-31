@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AudioService } from 'app/core/services/audio.service';
 import { Sound } from 'app/core/models/sound';
 import { StreamState } from 'app/core/models/stream-state';
-import { BehaviorSubject, combineLatest, Observable} from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { SoundsService } from './sounds.service';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { SoundsActions } from './state/sounds.actions';
+import { selectSounds } from './state/sounds.selectors';
 
 @Component({
   selector: 'app-sounds',
@@ -16,20 +19,18 @@ import { ActivatedRoute } from '@angular/router';
 export class SoundsComponent implements OnInit {
   sounds = new Observable<Sound[]>();
   searchValue$ = new BehaviorSubject<string>('');
+  state$ = new Observable<StreamState>();
   loading$!: Observable<boolean>;
-  state!: StreamState;
   currentFile!: Sound;
 
-  constructor(private soundsService: SoundsService, private audioService: AudioService, private activatedRoute: ActivatedRoute) {}
+  constructor(private soundsService: SoundsService, private audioService: AudioService, private activatedRoute: ActivatedRoute, private store: Store) {}
 
   ngOnInit(): void {
     this.loading$ = this.soundsService.getLoading();
+    this.state$ = this.audioService.getState().pipe(shareReplay(1));
+    this.sounds = this.store.select(selectSounds);
 
     this.handleSearch();
-
-    this.audioService.getState().subscribe((state) => {
-      this.state = state;
-    });
   }
 
   indentify(_index: number, item: Sound): number {
@@ -54,11 +55,11 @@ export class SoundsComponent implements OnInit {
   }
 
   private handleSearch(): void {
-    this.sounds = combineLatest([this.searchValue$, this.activatedRoute.params]).pipe(
+    combineLatest([this.searchValue$, this.activatedRoute.params]).pipe(
       debounceTime(500),
       distinctUntilChanged(),
-      switchMap(([name, params]) => this.soundsService.getSounds(name, params['categoryId']))
-    )
+      tap(([name, {categoryId}]) => this.store.dispatch(SoundsActions.loadSounds({name, categoryId})))
+    ).subscribe()
   }
 
   private playStream(url: string): void {

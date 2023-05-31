@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'app/core/services/auth.service';
+import { Store } from '@ngrx/store';
 import { User } from 'netlify-identity-widget';
 import { Observable } from 'rxjs';
+import { selectUser } from 'app/pages/login/state/login.selectors';
 import { ToolbarService } from '../toolbar/toolbar.service';
+import { AuthState } from 'app/pages/login/state/login.state';
 
 @Component({
   selector: 'app-sidenav',
@@ -12,10 +14,10 @@ import { ToolbarService } from '../toolbar/toolbar.service';
 export class SidenavComponent implements OnInit {
   user$!: Observable<User | null>;
 
-  constructor(private toolbarService: ToolbarService, private authService: AuthService) { }
+  constructor(private toolbarService: ToolbarService, private store: Store<AuthState>) { }
 
   ngOnInit(): void {
-    this.user$ = this.authService.getUser();
+    this.user$ = this.store.select(selectUser);
   }
 
   closeSidenav(): void {

@@ -2,7 +2,7 @@
   <button class="sidenav-button" *ngIf="isAvailabilitySidenav$ | async" mat-icon-button (click)="toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>Moodify ({{appVersion}})</span>
+  <a class="logo" [routerLink]="'home'">Moodify ({{appVersion}})</a>
   <div class="user" *ngIf="(user$ | async) as user">
     <span>{{user.email}}</span>
     <button mat-icon-button (click)="logout()">

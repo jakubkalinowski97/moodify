@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { filter, map } from 'rxjs';
+import { Router } from '@angular/router';
+
+import netlifyIdentity from 'netlify-identity-widget';
 
 import { AuthService } from '../../core/services/auth.service';
+import { Store } from '@ngrx/store';
+import { LoginActions } from './state/login.actions';
+import { selectUser } from './state/login.selectors';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,21 +16,27 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private store: Store, private router: Router) { }
 
   ngOnInit(): void {
-    if(this.authService.isAuthenticatedRaw()) {
-      this.router.navigate(['/home']);
-    } else {
-      this.showLoginModal();
-    }
+    this.store.select(selectUser).pipe().subscribe((user) => {
+      if(user) {
+        this.router.navigate(['/home']);
+      } else {
+        this.showLoginModal();
+      }
+    })
   }
 
   showLoginModal(): void {
-    this.authService.showLoginModal();
+    this.store.dispatch(LoginActions.login());
   }
 
   showRegistrationModal(): void {
-    this.authService.showRegistrationModal();
+    this.store.dispatch(LoginActions.singup());
+  }
+
+  closeLoginModal(): void {
+    this.store.dispatch(LoginActions.loginClose());
   }
 }

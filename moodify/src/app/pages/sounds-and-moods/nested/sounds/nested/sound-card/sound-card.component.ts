@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AudioService } from 'app/core/services/audio.service';
 import { Sound } from 'app/core/models/sound';
 import { StreamState } from 'app/core/models/stream-state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sound-card',
@@ -12,7 +13,7 @@ export class SoundCardComponent {
   @Input()
   data!: Sound;
   @Input()
-  state!: StreamState;
+  state$!: Observable<StreamState>;
 
   @Output() openFile = new EventEmitter<Sound>();
 

@@ -42,9 +42,12 @@ export class BackgroundMoodComponent implements OnInit, AfterViewInit {
     });
   }
 
+  indentify(_index: number, item: Sound): number {
+    return item.id;
+  }
+
   ngAfterViewInit(): void {
     this.applyFilters();
-
   }
 
   setVolume(value: number): void {

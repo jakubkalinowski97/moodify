@@ -9,11 +9,11 @@
     </div>  
 </mat-toolbar>
 <app-spinner [loading$]="loading$"></app-spinner>
-<div *ngIf="(sounds | async) as soundsList" class="container">
-    <app-sound-card 
-    *ngFor="let item of soundsList" 
+<div *ngIf="(sounds | async) as soundsList;" class="container">
+    <app-sound-card
+    *ngFor="let item of soundsList; trackBy:indentify" 
     [data]="item" 
-    [state]="state" 
+    [state$]="state$"
     (openFile)="openFile($event)"
     ></app-sound-card>
 </div>

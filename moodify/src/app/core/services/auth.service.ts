@@ -1,42 +1,33 @@
 import { Injectable } from '@angular/core';
-import netlifyIdentity, { User } from 'netlify-identity-widget';
-import { Observable, map, Subject, tap, BehaviorSubject } from 'rxjs';
+import netlifyIdentity from 'netlify-identity-widget';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { LoginActions } from 'app/pages/login/state/login.actions';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private user$ = new BehaviorSubject<User | null>(null);
-  private user!: User | null;
   private inviteToken: string = '';
-  private isAdmin$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private router: Router) { 
-    this.handleNetlifyEvents();
-    netlifyIdentity.init();
-  }
+  constructor(private router: Router, private store: Store) { }
 
-  private handleNetlifyEvents(): void {
+  handleNetlifyEvents(): void {
     netlifyIdentity.on('init', (user) => {
-      this.user$.next(user);
-      this.isAdmin$.next(user?.app_metadata?.roles?.includes('admin') || false);
-      this.user = user;
+      this.store.dispatch(LoginActions.loginSuccess({ user }))
     });
 
     netlifyIdentity.on('login', (user) => {
-        this.user$.next(user);
-        this.user = user;
-        this.isAdmin$.next(user?.app_metadata?.roles?.includes('admin') || false);
+        this.store.dispatch(LoginActions.loginSuccess({ user }))
         this.closeLoginModal();
         this.router.navigate(['/']);
     });
 
     netlifyIdentity.on('logout', () => {
-      this.user$.next(null);
-      this.user = null;
     });
+
+    netlifyIdentity.init();
   }
 
   showLoginModal(): void {
@@ -51,40 +42,11 @@ export class AuthService {
     netlifyIdentity.open('signup');
   }
 
-  getUser(): Observable<User | null> {
-    return this.user$.asObservable();
-  }
-
-  getUserRaw(): User | null {
-    return this.user;
-  }
-
-  isAuthenticated(): Observable<boolean> {
-    return this.user$.asObservable()
-      .pipe(
-        map(user => Boolean(user))
-      )
-  }
-
-  isAdmin(): Observable<boolean> {
-    return this.isAdmin$.asObservable()
-  }
-
-  isAuthenticatedRaw(): boolean {
-    return Boolean(this.user);
-  }
-
   setInviteToken(token: string): void {
     this.inviteToken = token;
   }
 
   getInviteToken(): string {
     return this.inviteToken;
-  }
-
-  logout(): void {
-    netlifyIdentity.logout();
-    this.router.navigate(['/']);
-    this.showLoginModal();
   }
 }
