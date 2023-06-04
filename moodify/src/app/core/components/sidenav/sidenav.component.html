@@ -5,5 +5,5 @@
             <mat-icon>close</mat-icon>
         </button>
     </div>
-    <!-- <app-filters></app-filters> -->
+    <ng-template [cdkPortalOutlet]="componentInPortal$ | async"></ng-template>
 </ng-container>

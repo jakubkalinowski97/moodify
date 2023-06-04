@@ -23,20 +23,6 @@ export class BackgroundMoodService {
     return this.selectedFilters$.asObservable();
   }
 
-  toggleFilter(filter: Filter): void {
-    const currentFilters = this.selectedFilters$.value;
-
-    if (currentFilters.some((currentFilter) => currentFilter.id === filter.id)) {
-      this.selectedFilters$.next(
-        currentFilters.filter((filteredFilter) => filter.id !== filteredFilter.id)
-      )
-    } else {
-      this.selectedFilters$.next(
-        [...currentFilters, filter]
-      )
-    }
-  }
-
   getMoods(categoryId: number): Observable<Sound[]> {
     this.loading$.next(true);
 

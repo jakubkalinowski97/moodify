@@ -13,8 +13,9 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { LoginModule } from './pages/login/login.module';
-import { initSynchronousFactory } from './init-on-startup';
+import { initAppFactory } from './init-on-startup';
 import { AuthService } from './core/services/auth.service';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,10 @@ import { AuthService } from './core/services/auth.service';
     HttpClientModule,
     CoreModule,
     LoginModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({router: routerReducer}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25 })
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [
     AudioService,
@@ -40,7 +42,7 @@ import { AuthService } from './core/services/auth.service';
     },
     {
       provide: APP_INITIALIZER,
-      useFactory: initSynchronousFactory,
+      useFactory: initAppFactory,
       deps: [AuthService],
       multi: true
     }

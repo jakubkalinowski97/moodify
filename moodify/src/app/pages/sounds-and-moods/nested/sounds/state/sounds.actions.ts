@@ -6,7 +6,9 @@ export const SoundsActions = createActionGroup({
     events: {
         'Load Sounds': props<{name: string, categoryId: number}>(),
         'Load Sounds Success': props<{sounds: Sound[]}>(),
-        'Load Sounds Error': props<{error: Error}>()
+        'Load Sounds Error': props<{error: Error}>(),
+        'Set Search Value': props<{searchValue: string}>(),
+        'Change Volume': props<{volume: number}>()
     }
 });
 

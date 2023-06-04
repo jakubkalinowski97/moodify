@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { PortalModule } from '@angular/cdk/portal';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -47,7 +48,8 @@ import { LoginModule } from 'app/pages/login/login.module';
     MatToolbarModule,
     RouterModule,
     MatButtonModule,
-    LoginModule
+    LoginModule,
+    PortalModule
   ],
   exports: [
     CommonModule,

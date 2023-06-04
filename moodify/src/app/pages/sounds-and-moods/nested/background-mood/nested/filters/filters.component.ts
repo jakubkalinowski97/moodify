@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Filter } from 'app/core/models/filter';
-import { BackgroundMoodService } from '../../background-mood.service';
+import { Store } from '@ngrx/store';
+import { selectBackgroundMoodsFilters } from '../../state/background-mood.selectors';
+import { first, map } from 'rxjs';
+import { BackgroundMoodsActions } from '../../state/background-mood.actions';
 
 @Component({
   selector: 'app-filters',
@@ -8,7 +11,7 @@ import { BackgroundMoodService } from '../../background-mood.service';
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent {
-  constructor(private backgroundMoodsService: BackgroundMoodService){ }
+  constructor(private store: Store){ }
 
   filters: Filter[] = [
     {
@@ -30,6 +33,19 @@ export class FiltersComponent {
   ];
 
   toggleFilter(filter: Filter): void {
-    this.backgroundMoodsService.toggleFilter(filter);
+    this.store.select(selectBackgroundMoodsFilters).pipe(
+      first(),
+      map(filters => {
+        if (filters.some((currentFilter) => currentFilter.id === filter.id)) {
+          this.store.dispatch(BackgroundMoodsActions.setFilters({
+            filters: filters.filter((filteredFilter) => filter.id !== filteredFilter.id)
+          }))
+        } else {
+          this.store.dispatch(BackgroundMoodsActions.setFilters({
+            filters: [...filters, filter]
+          }))
+        }
+      })
+    ).subscribe();
   }
 }

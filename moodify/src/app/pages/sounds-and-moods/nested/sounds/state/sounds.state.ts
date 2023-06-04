@@ -1,5 +1,6 @@
 import { Sound } from "app/core/models/sound";
 
 export interface SoundsState {
-    sounds: Sound[]
+    sounds: Sound[],
+    searchValue: string
 }

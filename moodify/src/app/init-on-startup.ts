@@ -1,6 +1,6 @@
 import { AuthService } from "./core/services/auth.service";
 
-export function initSynchronousFactory(authService: AuthService) {
+export function initAppFactory(authService: AuthService) {
     return () => {
         authService.handleNetlifyEvents();
     };

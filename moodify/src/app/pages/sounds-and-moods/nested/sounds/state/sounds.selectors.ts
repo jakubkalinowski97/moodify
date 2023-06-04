@@ -5,3 +5,4 @@ import { soundsFeatureKey } from "./sounds.reducer";
 export const selectSoundsState = createFeatureSelector<SoundsState>(soundsFeatureKey);
 
 export const selectSounds = createSelector(selectSoundsState, (state) => state.sounds);
+export const selectSearchValue = createSelector(selectSoundsState, (state) => state.searchValue);

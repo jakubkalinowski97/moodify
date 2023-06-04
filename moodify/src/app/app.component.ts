@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivationStart, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { ToolbarService } from './core/components/toolbar/toolbar.service';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +13,19 @@ export class AppComponent implements OnInit {
   constructor(public toolbarService: ToolbarService, private router: Router){}
 
   ngOnInit(): void {
-    this.setSidenavButtonVisibility();
+    this.subscribeToSidenavData();
   }
 
-  private setSidenavButtonVisibility() {
+  private subscribeToSidenavData(): void {
     this.router.events.pipe(
       filter((event): event is ActivationStart => event instanceof ActivationStart),
       map((activationStartEvent: ActivationStart) => activationStartEvent.snapshot.data)
     ).subscribe((data) => {
-      this.toolbarService.setAvailability(data['isAvailabilitySidenav']);
+      const { isAvailabilitySidenav, componentInPortal } = data;
+      this.toolbarService.setAvailability(isAvailabilitySidenav);
+      if(componentInPortal) {
+        this.toolbarService.setComponentInPortal(new ComponentPortal(componentInPortal));
+      }
     });
   }
 }

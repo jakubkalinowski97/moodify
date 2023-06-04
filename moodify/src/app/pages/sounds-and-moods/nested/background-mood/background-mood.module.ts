@@ -7,11 +7,13 @@ import { StoreModule } from '@ngrx/store';
 import { backgroundMoodsFeatureKey, backgroundMoodsReducer } from "./state/background-mood.reducer";
 import { EffectsModule } from "@ngrx/effects";
 import { BackgroundMoodsEffects } from "./state/background-mood.effects";
+import { FiltersComponent } from "./nested/filters/filters.component";
 
 @NgModule({
   declarations: [
     BackgroundMoodComponent,
-    MoodCardComponent
+    MoodCardComponent,
+    FiltersComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren, ViewContainerRef } from '@angular/core';
-import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { BehaviorSubject, Observable, first, tap } from 'rxjs';
 
 import { BackgroundMoodService } from './background-mood.service';
 import { MoodCardComponent } from './nested/mood-card/mood-card.component';
@@ -9,7 +9,10 @@ import { AudioService } from 'app/core/services/audio.service';
 import { StreamState } from 'app/core/models/stream-state';
 import { Store } from '@ngrx/store';
 import { BackgroundMoodsActions } from './state/background-mood.actions';
-import { selectBackgroundMoods } from './state/background-mood.selectors';
+import { selectBackgroundMoods, selectBackgroundMoodsFilters, selectBackgroundMoodsRepeat, selectBackgroundMoodsVolume } from './state/background-mood.selectors';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { FiltersComponent } from './nested/filters/filters.component';
+import { ToolbarService } from 'app/core/components/toolbar/toolbar.service';
 
 @Component({
   selector: 'app-background-mood',
@@ -18,9 +21,9 @@ import { selectBackgroundMoods } from './state/background-mood.selectors';
   providers: [AudioService]
 })
 export class BackgroundMoodComponent implements OnInit, AfterViewInit {
-  moods = new Observable<Sound[]>();
+  moods$ = new Observable<Sound[]>();
   repeat$ = new Observable<boolean>();
-  volume$ = new BehaviorSubject<number>(0.5);
+  volume$ = new Observable<number>();
   loading$!: Observable<boolean>;
   state!: StreamState;
   currentFile!: Sound;
@@ -28,16 +31,15 @@ export class BackgroundMoodComponent implements OnInit, AfterViewInit {
   @ViewChildren(MoodCardComponent) cards!: QueryList<MoodCardComponent>;
   @ViewChildren(MoodCardComponent, { read: ElementRef }) cardsRef!: QueryList<ElementRef>;
 
-  constructor(private audioService: AudioService, private backgroundMoodService: BackgroundMoodService, private activatedRoute: ActivatedRoute, private store: Store) { }
+  constructor(private audioService: AudioService, private backgroundMoodService: BackgroundMoodService, private activatedRoute: ActivatedRoute, private store: Store, private toolbarService: ToolbarService) { }
 
   ngOnInit(): void {
     this.loading$ = this.backgroundMoodService.getLoading(); // TODO - not working
     
     this.handleMoods();
-    this.moods = this.store.select(selectBackgroundMoods);
-
-    this.audioService.setRepeat(true);
-    this.repeat$ = this.audioService.getRepeat();
+    this.moods$ = this.store.select(selectBackgroundMoods);
+    this.repeat$ = this.store.select(selectBackgroundMoodsRepeat);
+    this.volume$ = this.store.select(selectBackgroundMoodsVolume);
 
     this.audioService.getState().subscribe((state) => {
       this.state = state;
@@ -53,11 +55,11 @@ export class BackgroundMoodComponent implements OnInit, AfterViewInit {
   }
 
   setVolume(value: number): void {
-    this.volume$.next(value);
+    this.store.dispatch(BackgroundMoodsActions.changeVolume({volume: value}));
   }
 
   toggleRepeat(): void {
-    this.audioService.toggleRepeat();
+    this.repeat$.pipe(first()).subscribe(value => this.store.dispatch(value ? BackgroundMoodsActions.disableRepeat() : BackgroundMoodsActions.enableRepeat()));
   }
 
   private handleMoods(): void {
@@ -69,7 +71,7 @@ export class BackgroundMoodComponent implements OnInit, AfterViewInit {
   }
 
   private applyFilters(): void {
-    this.backgroundMoodService.getFilters().subscribe(filters => {
+    this.store.select(selectBackgroundMoodsFilters).subscribe(filters => {
       const cardElements = this.cards.map((card, index) => {
         return {
           ...card,

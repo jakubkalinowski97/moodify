@@ -1,8 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { AudioService } from 'app/core/services/audio.service';
 import { Sound } from 'app/core/models/sound';
 import { StreamState } from 'app/core/models/stream-state';
+
 @Component({
   selector: 'app-mood-card',
   templateUrl: './mood-card.component.html',
@@ -12,7 +13,7 @@ import { StreamState } from 'app/core/models/stream-state';
 export class MoodCardComponent implements OnInit, OnDestroy {
   @Input() data!: Sound;
   @Input() repeat$!: Observable<boolean>;
-  @Input() volumeMultiplier$!: Subject<number>;
+  @Input() volumeMultiplier$!: Observable<number>;
 
   volume$ = new Observable<number>();
   isSmooth = new BehaviorSubject<boolean>(false);

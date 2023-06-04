@@ -1,5 +1,6 @@
+import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class ToolbarService {
   isOpened$ = new BehaviorSubject<boolean>(false);
   isAvailable$ = new BehaviorSubject<boolean>(false);
+  componentInPortal$ = new Subject<ComponentPortal<any>>;
 
   constructor() { }
 
@@ -20,6 +22,10 @@ export class ToolbarService {
 
   toggle(): void {
     this.isOpened$.next(!this.isOpened$.value);
+  }
+
+  setComponentInPortal(component: ComponentPortal<any>): void {
+    this.componentInPortal$.next(component);
   }
 
   setAvailability(value: boolean): void {

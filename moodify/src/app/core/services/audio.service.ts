@@ -41,10 +41,6 @@ export class AudioService {
     return this.stateChange$.asObservable();
   }
 
-  getRepeat(): Observable<boolean> {
-    return this.repeat$.asObservable();
-  }
-
   getVolume(): Observable<number> {
     return this.volume$.asObservable();
   }
@@ -65,10 +61,6 @@ export class AudioService {
     this.stop$.next();
   }
 
-  toggleRepeat(): void {
-    this.repeat$.next(!this.repeat$.value);
-  }
-
   setRepeat(value: boolean): void {
     this.repeat$.next(value);
   }
@@ -80,7 +72,6 @@ export class AudioService {
   playStream(url: string) {
     return this.streamObservable(url)
       .pipe(
-        // tap(console.log),
         takeUntil(this.stop$)
       );
   }

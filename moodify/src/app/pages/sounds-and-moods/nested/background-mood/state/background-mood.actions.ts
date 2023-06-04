@@ -1,4 +1,5 @@
-import { createActionGroup, props } from "@ngrx/store";
+import { createActionGroup, emptyProps, props } from "@ngrx/store";
+import { Filter } from "app/core/models/filter";
 import { Sound } from "app/core/models/sound";
 
 export const BackgroundMoodsActions = createActionGroup({
@@ -6,7 +7,11 @@ export const BackgroundMoodsActions = createActionGroup({
     events: {
         'Load Moods': props<{categoryId: number}>(),
         'Load Moods Success': props<{moods: Sound[]}>(),
-        'Load Moods Error': props<{error: Error}>()
+        'Load Moods Error': props<{error: Error}>(),
+        'Enable Repeat': emptyProps(),
+        'Disable Repeat': emptyProps(),
+        'Change Volume': props<{volume: number}>(),
+        'Set Filters': props<{filters: Filter[]}>()
     }
 });
 
