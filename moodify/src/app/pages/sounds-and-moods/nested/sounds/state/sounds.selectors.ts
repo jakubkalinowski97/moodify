@@ -6,3 +6,4 @@ export const selectSoundsState = createFeatureSelector<SoundsState>(soundsFeatur
 
 export const selectSounds = createSelector(selectSoundsState, (state) => state.sounds);
 export const selectSearchValue = createSelector(selectSoundsState, (state) => state.searchValue);
+export const selectVolume = createSelector(selectSoundsState, (state) => state.volume);

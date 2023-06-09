@@ -9,7 +9,7 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./sounds-table.component.scss']
 })
 export class SoundsTableComponent implements OnInit {
-  readonly displayedColumns: string[] = ['isVisible', 'name', 'category', 'subcategory'];
+  readonly displayedColumns: string[] = ['isVisible', 'name', 'category', 'subcategory', 'poster'];
   private _data: Sound[] = [];
   private onDestroy$ = new Subject<void>();
   selection = new SelectionModel<Sound>(true, []);
@@ -24,7 +24,8 @@ export class SoundsTableComponent implements OnInit {
     return this._data;
   }
 
-  @Output() updatedSound = new EventEmitter<{id: number, isVisible: boolean}>();
+  @Output() showSound = new EventEmitter<Sound>();
+  @Output() hideSound = new EventEmitter<Sound>();
 
   ngOnInit(): void {
     this.subscribeToSelectionChanges();
@@ -50,17 +51,16 @@ export class SoundsTableComponent implements OnInit {
     this.selection.select(...this.data);
   }
 
-  updateSound(id: number, isVisible: boolean): void {
-    this.updatedSound.emit({id, isVisible});
-  }
-
   private subscribeToSelectionChanges(): void {
     this.selection.changed.pipe(
       takeUntil(this.onDestroy$)
     ).subscribe((changedSelection) => {
-      changedSelection.added.forEach((item) => {this.updateSound(item.id, true)});
-
-      changedSelection.removed.forEach((item) => {this.updateSound(item.id, false)});
+      changedSelection.added.forEach((item) => {
+        this.showSound.emit(item);
+      });
+      changedSelection.removed.forEach((item) => {
+        this.hideSound.emit(item);
+      });
     });
   }
 }

@@ -36,7 +36,6 @@ export class BackgroundMoodComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.loading$ = this.backgroundMoodService.getLoading(); // TODO - not working
     
-    this.handleMoods();
     this.moods$ = this.store.select(selectBackgroundMoods);
     this.repeat$ = this.store.select(selectBackgroundMoodsRepeat);
     this.volume$ = this.store.select(selectBackgroundMoodsVolume);

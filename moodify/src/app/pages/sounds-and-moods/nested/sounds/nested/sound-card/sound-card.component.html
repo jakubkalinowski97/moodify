@@ -9,7 +9,7 @@
   </mat-card-header>
   <div class="image-container">
     <img [ngClass]="'default-card'"
-      [src]="'assets/cthulhu-default.jpeg'"/>
+      [src]="data.poster_url || 'assets/cthulhu-default.jpeg'"/>
     <div class="slider" *ngIf="state.currentSoundSrc.includes(data.audio_url) && state.currentTime !== state.duration">
       <mat-slider min="0" [max]="state.duration" step="1">
         <input matSliderThumb [value]="state.currentTime" (input)="seekTo($any($event.target).value)">

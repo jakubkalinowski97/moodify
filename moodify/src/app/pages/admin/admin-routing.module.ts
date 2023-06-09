@@ -6,14 +6,17 @@ import { AdminResolver } from './admin.resolver';
 
 
 const routes: Routes = [
-    {
-        path: '',
-        component: AdminPanelComponent,
-        canActivate: [AdminGuard],
-        resolve: {
-          sounds: AdminResolver
-        }
+  {
+    path: '',
+    component: AdminPanelComponent,
+    canActivate: [AdminGuard],
+    resolve: {
+      sounds: AdminResolver
+    },
+    data: {
+      animation: '*'
     }
+  }
 ];
 
 @NgModule({

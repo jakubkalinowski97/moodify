@@ -7,7 +7,6 @@ export const BackgroundMoodsActions = createActionGroup({
     events: {
         'Load Moods': props<{categoryId: number}>(),
         'Load Moods Success': props<{moods: Sound[]}>(),
-        'Load Moods Error': props<{error: Error}>(),
         'Enable Repeat': emptyProps(),
         'Disable Repeat': emptyProps(),
         'Change Volume': props<{volume: number}>(),

@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AdminService {
   constructor(private api: HttpClient) { }
 
-  getSounds(): Observable<Sound[]> {
+  getSoundsAndMoods(): Observable<Sound[]> {
     const params = new HttpParams().set('type', 'all');
 
     return this.api.get<Sound[]>('/api/audios', {

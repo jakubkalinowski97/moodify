@@ -25,6 +25,18 @@
         <td mat-cell *matCellDef="let element"> {{element.subcategory}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="poster">
+        <th mat-header-cell *matHeaderCellDef> Okładka </th>
+        <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element.poster_url">
+                <mat-icon class="origin" cdkOverlayOrigin #CdkOverlayOrigin="cdkOverlayOrigin">info</mat-icon>
+                <app-overlay [CdkOverlayOrigin]="CdkOverlayOrigin">
+                    <img class="poster" [src]="element.poster_url">
+                </app-overlay>
+            </ng-container>
+        </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

@@ -3,6 +3,7 @@ import { createEffect, ofType, Actions } from "@ngrx/effects";
 import { SoundsActions } from "./sounds.actions";
 import { EMPTY, catchError, debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
 import { SoundsService } from "../sounds.service";
+import { AppActions } from "app/state/app.actions";
 
 @Injectable()
 export class SoundsEffects {
@@ -15,7 +16,7 @@ export class SoundsEffects {
                 .pipe(
                     map(sounds => SoundsActions.loadSoundsSuccess({sounds})),
                     catchError(() => { 
-                        SoundsActions.loadSoundsError({error: new Error('Sounds fetching failed.')}); 
+                        AppActions.apiRequestFailed({error: new Error('Sounds fetching failed.')}); 
                         return EMPTY;
                     })
                 )

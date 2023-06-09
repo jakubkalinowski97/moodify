@@ -11,6 +11,6 @@ export class AdminResolver implements Resolve<Sound[]> {
   constructor(private adminService: AdminService) {}
 
   resolve(): Observable<Sound[]> {
-    return this.adminService.getSounds();
+    return this.adminService.getSoundsAndMoods();
   }
 }

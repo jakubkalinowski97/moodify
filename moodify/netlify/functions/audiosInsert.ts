@@ -108,10 +108,10 @@ function parseMultipartForm(event: any): Promise<NewSound> {
             }
         });
 
-        bb.on('close', () => {
+        bb.on('finish', () => {
             resolve(sound);
         });
 
-        bb.end(Buffer.from(event.body, 'base64'));
+        bb.write(event.body);
     });
 }

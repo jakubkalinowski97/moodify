@@ -4,6 +4,8 @@ import { HomeComponent } from './home.component';
 import { CardComponent } from './nested/card/card.component';
 import { CoreModule } from 'app/core/core.module';
 import { HomeRoutingModule } from './home-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { homeFeatureKey, homeReducer } from './state/home.reducer';
 
 
 
@@ -15,7 +17,8 @@ import { HomeRoutingModule } from './home-routing.module';
   imports: [
     CommonModule,
     CoreModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    StoreModule.forFeature(homeFeatureKey, homeReducer)
   ]
 })
 export class HomeModule { }

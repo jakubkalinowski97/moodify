@@ -16,6 +16,7 @@ import { LoginModule } from './pages/login/login.module';
 import { initAppFactory } from './init-on-startup';
 import { AuthService } from './core/services/auth.service';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
+import { AppEffects } from './state/app.effects';
 
 @NgModule({
   declarations: [
@@ -29,8 +30,8 @@ import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
     CoreModule,
     LoginModule,
     StoreModule.forRoot({router: routerReducer}),
-    EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25 }),
+    EffectsModule.forRoot([AppEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, trace: true }),
     StoreRouterConnectingModule.forRoot()
   ],
   providers: [

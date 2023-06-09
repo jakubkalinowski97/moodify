@@ -1,9 +1,12 @@
 import AWS from "aws-sdk";
 
 export function getPresignedUrl(fileUrl = ''): string {
+    if(!fileUrl) {
+        return '';
+    }
     const EXPIRED_AFTER_MINUTES = Number(process.env['LIFETIME_TOKEN_AWS']);
-
     const fileName = new URL(fileUrl).pathname.slice(1);
+    console.log(fileName);
     if (!fileName) {
         throw new Error('No file url.');
     }

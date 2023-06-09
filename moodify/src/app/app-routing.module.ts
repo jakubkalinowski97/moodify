@@ -27,7 +27,10 @@ const routes: Routes = [
   },
   {
     path: '*',
-    redirectTo: '/home'
+    redirectTo: '/home',
+    data: {
+      animation: '*'
+    }
   },
   {
     path: '**',

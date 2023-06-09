@@ -1,6 +1,6 @@
 <mat-tab-group backgroundColor="primary">
     <mat-tab label="Zarządzaj dźwiękami">
-        <app-sounds-table [data]="data$ | async" (updatedSound)="updateSound($event)"></app-sounds-table>
+        <app-sounds-table [data]="data$ | async" (showSound)="showSound($event)" (hideSound)="hideSound($event)"></app-sounds-table>
     </mat-tab>
     <mat-tab label="Dodaj nowy dźwięk">
         <app-new-sound-form></app-new-sound-form>

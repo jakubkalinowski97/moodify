@@ -5,4 +5,5 @@ export interface Sound {
     category_id: number;
     subcategory_id: number;
     isVisible: boolean;
+    poster_url: string;
 }

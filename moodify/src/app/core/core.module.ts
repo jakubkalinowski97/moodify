@@ -17,6 +17,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { PortalModule } from '@angular/cdk/portal';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
+import { OverlayModule } from '@angular/cdk/overlay';
+
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -26,10 +29,14 @@ import { MainComponent } from './main/main.component';
 import { PageContainerComponent } from './page-container/page-container.component';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { LoginModule } from 'app/pages/login/login.module';
+import { OverlayComponent } from './components/overlay/overlay.component';
 
 
 
 @NgModule({
+  providers: [
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }
+  ],
   declarations: [
     SearchInputComponent,
     SpinnerComponent,
@@ -38,7 +45,8 @@ import { LoginModule } from 'app/pages/login/login.module';
     ItemComponent,
     MainComponent,
     PageContainerComponent,
-    FileUploaderComponent
+    FileUploaderComponent,
+    OverlayComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +57,8 @@ import { LoginModule } from 'app/pages/login/login.module';
     RouterModule,
     MatButtonModule,
     LoginModule,
-    PortalModule
+    PortalModule,
+    OverlayModule
   ],
   exports: [
     CommonModule,
@@ -69,12 +78,15 @@ import { LoginModule } from 'app/pages/login/login.module';
     MatTableModule,
     MatSelectModule,
     MatDividerModule,
+    MatSnackBarModule,
+    OverlayModule,
     SearchInputComponent,
     SpinnerComponent,
     SidenavComponent,
     ToolbarComponent,
     MainComponent,
-    FileUploaderComponent
+    FileUploaderComponent,
+    OverlayComponent
   ]
 })
 export class CoreModule { }

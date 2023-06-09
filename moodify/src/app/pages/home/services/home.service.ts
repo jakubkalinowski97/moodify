@@ -7,7 +7,7 @@ import { Category } from 'app/core/models/category';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class HomeService {
 
   constructor(private api: HttpClient) { }
 

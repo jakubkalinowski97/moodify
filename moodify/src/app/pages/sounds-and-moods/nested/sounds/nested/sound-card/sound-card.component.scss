@@ -5,13 +5,13 @@
     mat-card {
         position: relative;
         box-sizing: border-box;
-        max-width: 250px;
+        max-width: 200px;
         margin: 0 10px 10px 0;
         background: mat.get-color-from-palette(palettes.$teal-palette, 600);
     }
 
     .default-card {
-        filter: hue-rotate(50deg);
+        // filter: hue-rotate(50deg);
     }
     
     mat-card-title {
@@ -41,10 +41,13 @@
     .image-container {
         position: relative;
         width: 100%;
+        height: 200px;
 
         img {
-            background-position: center;
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5);
         }
 
         .slider {
@@ -86,7 +89,6 @@
 @media only screen and (max-width: 750px) {
     :host {    
         max-width: 50%;
-        width: 200px;
 
         mat-card-title {
             height: 60px;

@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { createEffect, ofType, Actions } from "@ngrx/effects";
-import { EMPTY, catchError, map, switchMap, tap } from "rxjs";
+import { EMPTY, catchError, map, switchMap } from "rxjs";
 import { BackgroundMoodService } from "../background-mood.service";
 import { BackgroundMoodsActions } from "./background-mood.actions";
+import { AppActions } from "app/state/app.actions";
 
 @Injectable()
 export class BackgroundMoodsEffects {
@@ -13,7 +14,7 @@ export class BackgroundMoodsEffects {
                 .pipe(
                     map(moods => BackgroundMoodsActions.loadMoodsSuccess({moods})),
                     catchError(() => { 
-                        BackgroundMoodsActions.loadMoodsError({error: new Error('Background moods fetching failed.')}); 
+                        AppActions.apiRequestFailed({error: new Error('Background moods fetching failed.')}); 
                         return EMPTY;
                     })
                 )
