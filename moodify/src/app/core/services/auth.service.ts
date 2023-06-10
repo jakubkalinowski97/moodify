@@ -3,6 +3,8 @@ import netlifyIdentity from 'netlify-identity-widget';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LoginActions } from 'app/pages/login/state/login.actions';
+import { selectAuthState } from 'app/pages/login/state/login.selectors';
+import { tap } from 'rxjs';
 
 
 @Injectable({
@@ -15,11 +17,12 @@ export class AuthService {
 
   handleNetlifyEvents(): void {
     netlifyIdentity.on('init', (user) => {
-      this.store.dispatch(LoginActions.loginSuccess({ user }))
+      this.store.dispatch(LoginActions.loginSuccess({ user }));
+      this.router.navigate(['/']);
     });
 
     netlifyIdentity.on('login', (user) => {
-        this.store.dispatch(LoginActions.loginSuccess({ user }))
+        this.store.dispatch(LoginActions.loginSuccess({ user }));
         this.closeLoginModal();
         this.router.navigate(['/']);
     });

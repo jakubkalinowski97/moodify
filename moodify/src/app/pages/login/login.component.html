@@ -1,2 +1,32 @@
-<button mat-button (click)="showLoginModal()">Logowanie</button>
-<button mat-button (click)="showRegistrationModal()">Rejestracja</button>
+<div class="container">
+    <h1>Witajcie, strudzeni wędrowcy!</h1>
+    <div class="container__buttons">
+        <button mat-button (click)="showLoginModal()">Logowanie</button>
+        <button mat-button (click)="showRegistrationModal()">Rejestracja</button>
+        <mat-divider></mat-divider>
+    </div>
+    <section class="container__section--with-image">
+        <img src="assets/login-page-1.jpg" class="left"/>
+        <p>
+            Przed wami oto jest Moodify - aplikacja, która przeniesie was w dźwiękową podróż przez tajemnicze światy
+            klasycznych RPG. Niezależnie od tego, czy odważnie stąpacie po magicznych ziemiach średniowiecza, czy też odkrywacie mroczne
+            zakamarki lat dwudziestych XX wieku, Moodify dostarczy wam odpowiednią atmosferę.
+            Ta magiczna aplikacja skrywa w sobie kolekcje dźwięków, które przeniosą was w czasy, gdzie magia splata się z
+            mieczem, a sekrety tkwią w ciemnościach. Usłyszycie symfonie zamków rycerskich, tajemnicze szepnięcia lasów i dudniące
+            bitwy, które ożywią wasze przygody na szlaku.
+        </p>
+        <mat-divider></mat-divider>
+    </section>
+    <div class="clear-float"></div>
+    <section class="container__section--with-image">
+        <img src="assets/login-page-2.jpg" class="right"/>
+        <p>
+            Ale to jeszcze nie wszystko! Moodify oferuje wam również dźwięki lat dwudziestych, gdzie mrok splata się z
+            jazzowymi rytmami.
+            Odkryjecie tu tajemnicze odgłosy opuszczonych domostw, gorące dźwięki saksofonów czy stłumione strzały w
+            okolicznym zaułku.
+            Przygotujcie się na niezapomniane podróże, w których Moodify stanie się waszym przewodnikiem przez światy
+            magicznych, nieraz mrocznych, przygód.
+        </p>
+    </section>
+</div>

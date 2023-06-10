@@ -1,7 +1,60 @@
+@use '@angular/material' as mat;
+@use "../../../palettes.scss" as palettes;
+
 :host {
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100%;
     width: 100%;
+
+    .container {
+        margin: 0 auto;
+        width: 50%;
+        min-width: 300px;
+        max-width: 650px;
+        padding: 25px;
+
+        h1 {
+            color: mat.get-color-from-palette(palettes.$teal-palette, 100);
+        }
+
+        .container__buttons {
+            padding: 10px 0;
+        }
+
+        .container__section--with-image {
+            width: 100%;
+            font-size: 1.1rem;
+            
+            p {
+                padding: 5px;
+                text-align: justify;
+                line-height: 1.5rem;
+            }
+
+            img {
+                width: 400px;
+                min-width: 250px;
+                max-width: 50%;
+                height: auto;
+                object-fit: contain;
+                border-radius: 5px;
+            }
+
+            .left {
+                float: left;
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
+
+            .right {
+                float: right;
+                margin-left: 10px;
+                margin-top: 10px;
+            }
+
+            .clear-float {
+                float: none;
+            }
+        }
+    }
 }

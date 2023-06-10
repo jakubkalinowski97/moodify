@@ -56,7 +56,6 @@ import { OverlayComponent } from './components/overlay/overlay.component';
     MatToolbarModule,
     RouterModule,
     MatButtonModule,
-    LoginModule,
     PortalModule,
     OverlayModule
   ],

@@ -6,6 +6,8 @@ import { StoreModule } from '@ngrx/store';
 import { LoginComponent } from './login.component';
 import { loginFeatureKey, loginReducer } from './state/login.reducer';
 import { LoginEffects } from './state/login.effects';
+import { LoginRoutingModule } from './login-routing.module';
+import { CoreModule } from 'app/core/core.module';
 
 
 @NgModule({
@@ -14,8 +16,8 @@ import { LoginEffects } from './state/login.effects';
   ],
   imports: [
     CommonModule,
-    StoreModule.forFeature(loginFeatureKey, loginReducer),
-    EffectsModule.forFeature(LoginEffects),
+    LoginRoutingModule,
+    CoreModule
   ]
 })
 export class LoginModule { }

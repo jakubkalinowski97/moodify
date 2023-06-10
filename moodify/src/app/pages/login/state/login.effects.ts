@@ -26,7 +26,7 @@ export class LoginEffects {
     )
 
     loginClose$ = createEffect((): any => this.actions$.pipe(
-            ofType(LoginActions.login),
+            ofType(LoginActions.loginClose),
             tap(() => netlifyIdentity.close())
         ),
         { dispatch: false }

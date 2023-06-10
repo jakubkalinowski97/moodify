@@ -12,11 +12,12 @@ import { CoreModule } from './core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { LoginModule } from './pages/login/login.module';
 import { initAppFactory } from './init-on-startup';
 import { AuthService } from './core/services/auth.service';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { AppEffects } from './state/app.effects';
+import { loginReducer } from './pages/login/state/login.reducer';
+import { LoginEffects } from './pages/login/state/login.effects';
 
 @NgModule({
   declarations: [
@@ -28,9 +29,8 @@ import { AppEffects } from './state/app.effects';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
-    LoginModule,
-    StoreModule.forRoot({router: routerReducer}),
-    EffectsModule.forRoot([AppEffects]),
+    StoreModule.forRoot({router: routerReducer, auth: loginReducer}),
+    EffectsModule.forRoot([AppEffects, LoginEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, trace: true }),
     StoreRouterConnectingModule.forRoot()
   ],
