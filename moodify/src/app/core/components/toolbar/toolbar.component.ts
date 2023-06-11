@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { selectUser } from 'app/pages/login/state/login.selectors';
 import { LoginActions } from 'app/pages/login/state/login.actions';
 import { AuthState } from 'app/pages/login/state/login.state';
+import { selectIsNavigationLoading } from 'app/state/app.selectors';
 
 @Component({
   selector: 'app-toolbar',
@@ -18,10 +19,12 @@ export class ToolbarComponent implements OnInit {
   user$!: Observable<User | null>;
   test!: any;
   isAvailabilitySidenav$!: Observable<boolean>;
+  isNavigationLoading$!: Observable<boolean>;
   constructor(private toolbarService: ToolbarService, private store: Store<AuthState>) {}
 
   ngOnInit(): void {
     this.isAvailabilitySidenav$ = this.toolbarService.isAvailable$;
+    this.isNavigationLoading$ = this.store.select(selectIsNavigationLoading);
     this.user$ = this.store.select(selectUser);
   }
 

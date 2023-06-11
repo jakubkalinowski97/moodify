@@ -18,6 +18,7 @@ import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { AppEffects } from './state/app.effects';
 import { loginReducer } from './pages/login/state/login.reducer';
 import { LoginEffects } from './pages/login/state/login.effects';
+import { appReducer } from './state/app.reducer';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { LoginEffects } from './pages/login/state/login.effects';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
-    StoreModule.forRoot({router: routerReducer, auth: loginReducer}),
+    StoreModule.forRoot({router: routerReducer, auth: loginReducer, app: appReducer}),
     EffectsModule.forRoot([AppEffects, LoginEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, trace: true }),
     StoreRouterConnectingModule.forRoot()

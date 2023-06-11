@@ -9,4 +9,5 @@
       <mat-icon>power_settings_new</mat-icon>
     </button>
   </div>
+  <mat-progress-bar *ngIf="isNavigationLoading$ | async" color="accent" mode="indeterminate" class="progress-bar"></mat-progress-bar>
 </mat-toolbar>

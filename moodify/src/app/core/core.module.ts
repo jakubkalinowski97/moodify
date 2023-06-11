@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PortalModule } from '@angular/cdk/portal';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -28,7 +29,6 @@ import { ItemComponent } from './components/sidenav/nested/item/item.component';
 import { MainComponent } from './main/main.component';
 import { PageContainerComponent } from './page-container/page-container.component';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
-import { LoginModule } from 'app/pages/login/login.module';
 import { OverlayComponent } from './components/overlay/overlay.component';
 
 
@@ -57,7 +57,8 @@ import { OverlayComponent } from './components/overlay/overlay.component';
     RouterModule,
     MatButtonModule,
     PortalModule,
-    OverlayModule
+    OverlayModule,
+    MatProgressBarModule
   ],
   exports: [
     CommonModule,
@@ -78,6 +79,7 @@ import { OverlayComponent } from './components/overlay/overlay.component';
     MatSelectModule,
     MatDividerModule,
     MatSnackBarModule,
+    MatProgressBarModule,
     OverlayModule,
     SearchInputComponent,
     SpinnerComponent,
